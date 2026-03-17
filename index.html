@@ -8,7 +8,13 @@
 </head>
 <body>
 
-<header class="navbar">
+<div class="background-blobs">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+</div>
+
+<header class="navbar glass-panel">
     <div class="nav-logo">Secure<span>Pay</span></div>
     <nav class="nav-menu">
         <a href="#">Inicio</a>
@@ -22,7 +28,7 @@
     <div class="main-wrapper">
         <div class="card-section">
             <div class="card" id="card">
-                <div class="card-front">
+                <div class="card-front glass-panel">
                     <div class="card-header">
                         <svg class="card-chip" viewBox="0 0 50 40" width="45" height="35" xmlns="http://www.w3.org/2000/svg">
                             <rect width="50" height="40" rx="6" fill="#e5c158" />
@@ -31,7 +37,7 @@
                             <rect x="18" y="14" width="14" height="12" rx="2" fill="#f3d573" />
                         </svg>
                         
-                        <svg class="nfc-icon-img" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e2e8f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <svg class="nfc-icon-img" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4 10.5a2.5 2.5 0 0 1 0 3"/>
                             <path d="M8 8.5a6.5 6.5 0 0 1 0 7"/>
                             <path d="M12 6.5a10.5 10.5 0 0 1 0 11"/>
@@ -55,7 +61,7 @@
                     <div class="bank-logo-container" id="bank-logo-display"></div>
                 </div>
 
-                <div class="card-back">
+                <div class="card-back glass-panel">
                     <div class="magnetic-strip"></div>
                     <div class="back-body">
                         <div class="signature-row">
@@ -78,37 +84,37 @@
             </div>
         </div>
 
-        <div class="payment-form">
+        <div class="payment-form glass-panel">
             <h2 class="form-title">Detalles de Pago</h2>
             
             <div class="input-field">
                 <label>Monto de Pago</label>
-                <input type="text" placeholder="$">
+                <input type="text" placeholder="$ 0.00" class="glass-input">
             </div>
             <div class="input-field">
                 <label>Número de Tarjeta</label>
-                <input type="text" id="input-number" maxlength="19" placeholder="1234 3478 9876 3657">
+                <input type="text" id="input-number" maxlength="19" placeholder="1234 3478 9876 3657" class="glass-input">
             </div>
             <div class="input-field">
                 <label>Titular de la Tarjeta</label>
-                <input type="text" id="input-name" placeholder="Nombre Completo">
+                <input type="text" id="input-name" placeholder="Nombre Completo" class="glass-input">
             </div>
             
             <div class="form-row">
                 <div class="input-field exp-group">
                     <label>Fecha de Expiración</label>
                     <div class="select-wrapper">
-                        <select id="select-day">
+                        <select id="select-day" class="glass-input">
                             <option value="" disabled selected>Mes</option>
                         </select>
-                        <select id="select-year">
+                        <select id="select-year" class="glass-input">
                             <option value="" disabled selected>Año</option>
                         </select>
                     </div>
                 </div>
                 <div class="input-field cvv-group">
                     <label>CVV</label>
-                    <input type="text" id="input-cvv" maxlength="3" placeholder="000">
+                    <input type="text" id="input-cvv" maxlength="3" placeholder="000" class="glass-input">
                 </div>
             </div>
 
@@ -117,7 +123,7 @@
     </div>
 </main>
 
-<footer class="footer">
+<footer class="footer glass-panel">
     <div class="footer-content">
         <p>&copy; 2026 Desarrollado por <strong>[Tu Nombre]</strong> | Frontend Developer</p>
         <div class="social-links">
