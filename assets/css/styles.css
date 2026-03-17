@@ -1,187 +1,302 @@
+/* ================= ESTILOS GENERALES ================= */
 :root {
-    --bg-page: #f8fafc;
-    --card-bg: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); 
-    --text-color: #ffffff;
-    --text-dark: #1e293b;
-    --input-border: #cbd5e1;
-    --primary-btn: #6366f1;
+    --primary-color: #6366f1;
+    --bg-color: #f8fafc;
+    --text-main: #1e293b;
+    --text-muted: #64748b;
+    --border-color: #e2e8f0;
+    
+    /* Variable para el color frontal y el CVV trasero */
+    --card-color-front: #172145; 
+    /* Fondo de la tarjeta trasera (claro) */
+    --card-color-back: #f1f5f9; 
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 body {
-    background-color: var(--bg-page);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    background-color: var(--bg-color);
+    color: var(--text-main);
     min-height: 100vh;
-    margin: 0;
-    padding-top: 80px; /* Espacio para que el header no tape el contenido */
-    box-sizing: border-box;
 }
 
-/* --- BARRA DE NAVEGACIÓN --- */
-.navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+/* ================= NAVEGACIÓN ================= */
+header {
+    background: white;
+    padding: 20px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 60px;
-    box-sizing: border-box;
-    z-index: 1000;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
 }
 
-.nav-logo {
-    font-size: 28px;
+.logo {
+    font-size: 24px;
     font-weight: 800;
-    color: var(--text-dark);
 }
 
-.nav-logo span {
-    color: var(--primary-btn);
+.logo span {
+    color: var(--primary-color);
 }
 
-.nav-menu a {
-    text-decoration: none;
-    color: #475569;
-    font-weight: 600;
-    margin-left: 35px;
-    font-size: 15px;
-    transition: color 0.3s ease;
-}
-
-.nav-menu a:hover {
-    color: var(--primary-btn);
-}
-
-/* --- CONTENEDOR PRINCIPAL --- */
-.main-wrapper {
+nav {
     display: flex;
-    gap: 60px;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover { color: var(--text-main); }
+
+/* ================= CONTENEDOR PRINCIPAL ================= */
+.main-container {
+    max-width: 1000px;
+    margin: 60px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
     align-items: center;
 }
 
-/* --- TARJETA --- */
-.card-section {
-    width: 420px;
+/* ================= TARJETA (VISUAL) ================= */
+.card-visual-container {
     perspective: 1000px;
+    width: 420px;
+    height: 260px;
+    margin: auto;
 }
 
-.card {
+.card-visual {
     width: 100%;
-    height: 250px;
+    height: 100%;
     position: relative;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.8s;
     transform-style: preserve-3d;
 }
 
-.card.flipped { transform: rotateY(180deg); }
-
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 16px;
-    box-sizing: border-box;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
+.card-visual.flipped {
+    transform: rotateY(180deg);
 }
 
-.card-front {
-    background: var(--card-bg); 
-    color: var(--text-color);
-    padding: 25px;
+.card-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    overflow: hidden;
     display: flex;
     flex-direction: column;
 }
 
-.card-header {
+/* Frente de la Tarjeta (Azul Oscuro) */
+.card-front {
+    background: var(--card-color-front);
+    padding: 25px 30px;
+    justify-content: space-between;
+    color: white;
+}
+
+.card-front .top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.card-number-display {
-    font-size: 24px;
-    letter-spacing: 3px;
-    text-align: center;
-    margin: 50px 0 15px 0; 
-    font-family: monospace; 
-    direction: ltr; 
-}
-
-.card-footer {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-end;
-    gap: 40px; 
-    margin-top: auto;
+.chip {
+    width: 50px;
+    height: 38px;
+    background: #e2e8f0;
+    border-radius: 6px;
     position: relative;
+    background-image: linear-gradient(to bottom right, #f8cc67, #eab308); /* Color dorado para el chip */
 }
 
-.info-group.titular { max-width: 200px; }
-#card-name-display { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-transform: uppercase; }
-.info-group.expiracion { text-align: left; }
-.label { color: #94a3b8; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
-.value { font-size: 15px; font-weight: 600; text-transform: uppercase; }
-
-/* LOGO DEL BANCO */
-.bank-logo-container {
-    position: absolute;
-    bottom: 22px;
-    right: 25px;
-    width: 65px;
+.logo-banco img {
     height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    z-index: 10;
+    object-fit: contain;
 }
 
-.bank-logo-container svg {
-    width: 100%;
-    height: auto;
+.card-number-display {
+    font-size: 26px;
+    letter-spacing: 3px;
+    margin-top: 15px;
+    font-family: monospace;
+    text-align: center;
+}
+
+.card-details-display {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.card-details-display .label {
+    font-size: 10px;
+    color: #94a3b8;
+    margin-bottom: 5px;
     display: block;
 }
 
-/* --- REVERSO DE LA TARJETA --- */
-.card-back { transform: rotateY(180deg); padding: 0; background: #e2e8f0; color: #334155; }
-.magnetic-strip { background: #1e293b; height: 50px; width: 100%; margin-top: 25px; }
-.back-body { padding: 20px; }
-.signature-row { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
-.white-bar-container { display: flex; flex-grow: 1; height: 38px; border: 1px solid #cbd5e1; align-items: center; background: white; }
-.signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; font-family: monospace; font-size: 16px; }
-.cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #cbd5e1; font-weight: bold; }
-.cvv-text-label { font-size: 13px; font-weight: 700; color: #334155; }
-.legal-text { font-size: 9px; color: #64748b; margin-top: 20px; }
-
-/* --- FORMULARIO --- */
-.payment-form {
-    width: 400px;
-    color: var(--text-dark);
+.card-details-display div {
+    font-size: 15px;
+    letter-spacing: 1px;
 }
 
-.form-title { margin: 0 0 25px 0; font-size: 26px; text-align: center; }
-.input-field { margin-bottom: 20px; }
-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
-input, select {
-    width: 100%; padding: 14px 15px; background: #ffffff;
-    border: 1px solid var(--input-border); border-radius: 8px; font-size: 15px;
-    outline: none; transition: all 0.3s; box-sizing: border-box;
+/* Reverso de la Tarjeta (Clara) */
+.card-back {
+    background: var(--card-color-back);
+    transform: rotateY(180deg);
+    padding: 0;
+    position: relative;
 }
-input:focus, select:focus { border-color: var(--primary-btn); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
-.form-row { display: flex; gap: 15px; }
-.exp-group { flex: 2; } .cvv-group { flex: 1; }
-.select-wrapper { display: flex; gap: 10px; }
 
-.pay-button {
-    width: 100%; background-color: var(--primary-btn); color: #ffffff;
-    border: none; padding: 16px; border-radius: 8px; font-weight: 700; font-size: 16px;
-    cursor: pointer; margin-top: 15px; transition: 0.3s;
+.magnetic-strip {
+    width: 100%;
+    height: 50px;
+    background-color: #1e293b;
+    margin-top: 30px;
 }
-.pay-button:hover { background-color: #4f46e5; }
+
+.signature-strip-container {
+    display: flex;
+    align-items: center;
+    margin: 20px 25px;
+    background: white;
+    height: 45px;
+    border-radius: 4px;
+    padding: 0 10px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.globe-icon {
+    width: 20px;
+    height: 20px;
+    background: #cbd5e1;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.signature-display {
+    flex-grow: 1;
+    font-style: italic;
+    color: #64748b;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+/* --- MODIFICACIÓN: Color del CVV idéntico al frente --- */
+.cvv-display {
+    background: var(--card-color-front); /* Aplica el azul oscuro */
+    color: white; /* Letra blanca para que contraste */
+    padding: 8px 20px;
+    font-weight: bold;
+    border-radius: 4px;
+    margin-right: 15px;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+.cvv-label-text {
+    font-weight: bold;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.legal-text {
+    font-size: 11px;
+    color: #94a3b8;
+    padding: 0 25px;
+    margin-top: 5px;
+}
+
+/* --- MODIFICACIÓN: Logo en la parte inferior derecha trasera --- */
+.logo-banco-back {
+    position: absolute;
+    bottom: 25px;
+    right: 30px;
+    height: 35px;
+}
+
+.logo-banco-back img {
+    height: 100%;
+    object-fit: contain;
+}
+
+/* ================= FORMULARIO ================= */
+.form-section {
+    background: transparent;
+}
+
+.form-section h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #1e293b;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.row {
+    display: flex;
+    gap: 15px;
+}
+
+.col {
+    flex: 1;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #4f46e5;
+}

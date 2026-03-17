@@ -1,81 +1,106 @@
-const card = document.getElementById('card');
-const inputNumber = document.getElementById('input-number');
-const inputName = document.getElementById('input-name');
-const inputCVV = document.getElementById('input-cvv');
-const selectDay = document.getElementById('select-day');
-const selectYear = document.getElementById('select-year');
-const bankLogoDisplay = document.getElementById('bank-logo-display');
+// Referencias al DOM (Formulario)
+const inputNumero = document.getElementById('input-numero');
+const inputNombre = document.getElementById('input-nombre');
+const inputMes = document.getElementById('input-mes');
+const inputAnio = document.getElementById('input-anio');
+const inputCvv = document.getElementById('input-cvv');
 
-// Generar meses (01 al 12)
-for (let i = 1; i <= 12; i++) {
-    let d = i < 10 ? '0' + i : i;
-    selectDay.add(new Option(d, d));
-}
+// Referencias al DOM (Tarjeta visual)
+const displayNumero = document.getElementById('display-numero');
+const displayFirmaNumero = document.getElementById('display-firma-numero');
+const displayNombre = document.getElementById('display-nombre');
+const displayFecha = document.getElementById('display-fecha');
+const displayCvv = document.getElementById('display-cvv');
 
-// Generar años (1980 al 2035)
-for (let i = 1980; i <= 2035; i++) {
-    let yearValue = i.toString().slice(-2);
-    selectYear.add(new Option(i, yearValue));
-}
+// Referencias al DOM (Logos y Animación)
+const logoFront = document.getElementById('logo-banco-front');
+const logoBack = document.getElementById('logo-banco-back');
+const cardVisual = document.getElementById('card-visual');
 
-// Lógica de Logos (¡Aparece DESDE EL PRIMER DÍGITO!)
-const updateBankLogo = (rawNumber) => {
-    bankLogoDisplay.innerHTML = ''; 
+// URLs de logos (Puedes cambiarlas por imágenes locales, ej: 'img/visa.png')
+const logos = {
+    visa: 'https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png',
+    mastercard: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg',
+    amex: 'https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg'
+};
+
+// ==========================================
+// FORMATEO DE NÚMERO Y DETECCIÓN DE MARCA
+// ==========================================
+inputNumero.addEventListener('input', (e) => {
+    // Eliminar cualquier cosa que no sea número
+    let valor = e.target.value.replace(/\D/g, '');
     
-    // Condición cambiada a >= 1 para que el logo se vea de inmediato
-    if (rawNumber.length >= 1) {
-        if (rawNumber.startsWith('4')) {
-            // Logo Visa
-            bankLogoDisplay.innerHTML = `
-                <svg viewBox="0 0 50 16" fill="#ffffff" width="100%" height="100%">
-                    <path d="M22.064 0h3.585l-3.376 15.65h-3.584L22.064 0zm15.42 15.253c-3.18 0-5.419-1.637-5.433-3.982-.021-1.9 1.76-2.956 3.102-3.593 1.378-.654 1.84-1.071 1.833-1.652-.01-.892-1.11-1.285-2.14-1.3-1.423-.021-2.253.371-3.033.722l-.427.194-.482-2.888c.783-.35 2.217-.66 3.71-.671 3.364 0 5.56 1.597 5.58 4.07.02 1.082-.365 2.1-1.284 2.828-.62.486-1.895 1.041-2.67 1.455-1.258.65-1.503 1.074-1.493 1.66.012.83.992 1.25 2.215 1.25 1.157-.02 1.948-.256 2.66-.583l.36-.164.462 2.76c-.722.327-2.008.66-3.468.66zm-17.708-3.09l.666-3.197c.502-2.384.97-4.636 1.438-6.883h3.535l-5.636 13.567H16.03l-3.05-10.457c-.208-.737-.41-1.03-1.04-1.393L8.6 2.05v-.206h5.812c.742 0 1.423.515 1.59 1.34L17.556 8.7a85.83 85.83 0 0 1 1.033 5.467h.034l.872-4.113.28-1.31zM6.9 15.65H2.336L.003 0H4.55l2.35 15.65z"/>
-                </svg>`;
-        } else if (rawNumber.startsWith('5')) {
-            // Logo Mastercard
-            bankLogoDisplay.innerHTML = `
-                <svg viewBox="0 0 44 28" width="100%" height="100%">
-                    <circle cx="14" cy="14" r="14" fill="#eb001b"/>
-                    <circle cx="30" cy="14" r="14" fill="#f79e1b"/>
-                    <path d="M22 25.12a13.94 13.94 0 0 0 0-22.24 13.94 13.94 0 0 0 0 22.24z" fill="#ff5f00"/>
-                </svg>`;
-        }
+    // Limpiar logos previos
+    logoFront.innerHTML = '';
+    logoBack.innerHTML = '';
+
+    // Detectar marca (Visa empieza con 4, Mastercard con 5, Amex con 3)
+    let marca = '';
+    if (valor.startsWith('4')) marca = 'visa';
+    else if (valor.startsWith('5')) marca = 'mastercard';
+    else if (valor.startsWith('3')) marca = 'amex';
+
+    // Si detecta una marca, inyecta la imagen en AMBOS lados
+    if (marca) {
+        const imgFront = document.createElement('img');
+        imgFront.src = logos[marca];
+        logoFront.appendChild(imgFront);
+
+        const imgBack = document.createElement('img');
+        imgBack.src = logos[marca];
+        logoBack.appendChild(imgBack);
     }
-};
 
-// Formatear número de tarjeta
-inputNumber.addEventListener('input', (e) => {
-    let val = e.target.value.replace(/\D/g, ''); 
-    let formatted = val.replace(/(\d{4})(?=\d)/g, '$1 ').trim(); 
-    e.target.value = formatted;
+    // Formatear con un espacio cada 4 dígitos en el input
+    let formateado = valor.replace(/(\d{4})(?=\d)/g, '$1 ');
+    e.target.value = formateado;
 
-    document.getElementById('card-num-display').innerText = formatted || '#### #### #### ####';
+    // Actualizar el número en la parte frontal de la tarjeta
+    displayNumero.textContent = formateado || '#### #### #### ####';
     
-    const lastDigits = val.slice(-4);
-    document.getElementById('card-last-digits').innerText = val.length >= 4 ? lastDigits : '####';
-    
-    // Llamar a la función del logo
-    updateBankLogo(val);
+    // Actualizar los últimos 4 dígitos en la tira de la parte trasera
+    if(valor.length >= 4) {
+        displayFirmaNumero.textContent = valor.slice(-4);
+    } else {
+        displayFirmaNumero.textContent = '####';
+    }
 });
 
-// Actualizar Nombre del titular
-inputName.addEventListener('input', (e) => {
-    document.getElementById('card-name-display').innerText = e.target.value || 'NOMBRE COMPLETO';
+// ==========================================
+// ACTUALIZAR NOMBRE
+// ==========================================
+inputNombre.addEventListener('input', (e) => {
+    displayNombre.textContent = e.target.value.toUpperCase() || 'NOMBRE COMPLETO';
 });
 
-// Actualizar Fecha de Expiración
-const updateDate = () => {
-    const d = selectDay.value || 'MM';
-    const y = selectYear.value || 'YY';
-    document.getElementById('card-exp-display').innerText = `${d}/${y}`;
-};
-selectDay.addEventListener('change', updateDate);
-selectYear.addEventListener('change', updateDate);
+// ==========================================
+// ACTUALIZAR FECHA
+// ==========================================
+function actualizarFecha() {
+    let mes = inputMes.value || 'MM';
+    let anio = inputAnio.value || 'YY';
+    displayFecha.textContent = `${mes}/${anio}`;
+}
+inputMes.addEventListener('change', actualizarFecha);
+inputAnio.addEventListener('change', actualizarFecha);
 
-// Animación de Giro y actualización de CVV
-inputCVV.addEventListener('focus', () => card.classList.add('flipped'));
-inputCVV.addEventListener('blur', () => card.classList.remove('flipped'));
-inputCVV.addEventListener('input', (e) => {
-    let val = e.target.value.replace(/\D/g, ''); 
-    e.target.value = val;
-    document.getElementById('card-cvv-display').innerText = val || '000';
+// ==========================================
+// CVV Y GIRO DE TARJETA
+// ==========================================
+// Girar al enfocar el input del CVV
+inputCvv.addEventListener('focus', () => {
+    cardVisual.classList.add('flipped');
+});
+
+// Regresar a la normalidad al salir del input del CVV
+inputCvv.addEventListener('blur', () => {
+    cardVisual.classList.remove('flipped');
+});
+
+// Actualizar los dígitos del CVV en tiempo real
+inputCvv.addEventListener('input', (e) => {
+    let valor = e.target.value.replace(/\D/g, ''); // Solo números
+    e.target.value = valor;
+    displayCvv.textContent = valor || '000';
 });
