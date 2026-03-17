@@ -2,12 +2,12 @@
     --primary: #6366f1;
     --text-dark: #334155;
     --text-light: #94a3b8;
-    --bg-page: #f8fafc;
+    --bg-page: #f8fafc; /* Fondo gris muy claro de la página */
 }
 
 body {
     background-color: var(--bg-page);
-    font-family: 'Inter', sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,24 +17,18 @@ body {
 
 .main-wrapper {
     display: flex;
-    gap: 30px;
+    gap: 40px;
     align-items: stretch;
 }
 
-/* --- ESTILO DE LOS RECUADROS SEPARADOS --- */
-.card-section, .payment-form {
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-}
-
-/* --- CONTENEDOR DE TARJETA --- */
+/* --- BLOQUE IZQUIERDO: TARJETA TRANSPARENTE --- */
 .card-section {
     width: 420px;
     display: flex;
     align-items: center;
+    justify-content: center;
     perspective: 1000px;
+    background: transparent; /* Hace que desaparezca el recuadro blanco */
 }
 
 .card {
@@ -52,20 +46,78 @@ body {
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
-    border-radius: 15px;
-    border: 1px solid #f1f5f9;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
     box-sizing: border-box;
-    background: #fff;
+    background: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Sombra para que flote sola */
 }
 
-/* Frente */
-.card-front { padding: 25px; }
-.chip-row { display: flex; justify-content: space-between; margin-bottom: 30px; }
-.card-number-display { font-size: 24px; letter-spacing: 2px; margin: 30px 0; color: var(--text-dark); }
-.card-info { display: flex; justify-content: space-between; font-size: 11px; }
-.label { color: var(--text-light); display: block; margin-bottom: 5px; }
+/* --- DETALLES DEL FRENTE --- */
+.card-front {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
-/* Reverso Detallado */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-chip {
+    width: 48px;
+    height: auto;
+}
+
+.nfc-icon {
+    color: #475569; /* Color gris oscuro para el NFC */
+    opacity: 0.8;
+}
+
+.card-number-display {
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    text-align: left;
+    margin: 15px 0;
+    font-family: monospace; /* Le da un toque más de tarjeta real */
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.info-group { flex: 1; }
+.label { color: var(--text-light); font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; }
+.value { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+
+.bank-logo-container {
+    width: 50px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.bank-logo-img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.bank-text-fallback {
+    color: #cbd5e1;
+    font-weight: 800;
+    font-size: 16px;
+    font-style: italic;
+}
+
+/* --- DETALLES DEL REVERSO --- */
 .card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; }
 .magnetic-strip { background: #cbd5e1; height: 50px; width: 100%; margin-top: 25px; }
 .back-body { padding: 20px; }
@@ -77,42 +129,59 @@ body {
     border: 1px solid #e2e8f0;
     align-items: center;
 }
-.signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; }
+.signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; font-family: monospace; font-size: 16px; }
 .cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #e2e8f0; font-weight: bold; }
 .cvv-text-label { font-size: 13px; font-weight: 700; color: var(--text-dark); }
 .legal-text { font-size: 9px; color: #94a3b8; line-height: 1.4; margin-top: 20px; }
 .footer-logo { display: flex; justify-content: flex-end; }
 .small-circle { width: 35px; height: 22px; background: #e2e8f0; border-radius: 4px; }
 
-/* --- ESTILO DEL FORMULARIO --- */
-.payment-form { width: 420px; color: var(--text-dark); }
-.payment-form h2 { margin: 0 0 25px 0; font-size: 22px; }
-.input-field { margin-bottom: 18px; }
-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+/* --- BLOQUE DERECHO: FORMULARIO --- */
+.payment-form {
+    width: 420px;
+    color: var(--text-dark);
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* Recuadro blanco solo para el formulario */
+}
+
+.form-title {
+    margin: 0 0 25px 0;
+    font-size: 24px;
+    text-align: center; /* Título centrado */
+    color: #1e293b;
+}
+
+.input-field { margin-bottom: 20px; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
 input, select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
+    padding: 12px 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
     font-size: 15px;
     outline: none;
-    transition: border 0.3s;
+    transition: all 0.3s;
+    box-sizing: border-box;
 }
-input:focus { border-color: var(--primary); }
+input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
 .form-row { display: flex; gap: 15px; }
 .exp-group { flex: 2; }
 .cvv-group { flex: 1; }
-.select-wrapper { display: flex; gap: 8px; }
+.select-wrapper { display: flex; gap: 10px; }
 
 .pay-button {
     width: 100%;
     background-color: var(--primary);
     color: white;
     border: none;
-    padding: 15px;
-    border-radius: 8px;
+    padding: 16px;
+    border-radius: 6px;
     font-weight: 700;
     font-size: 16px;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
+    transition: background 0.3s;
 }
+.pay-button:hover { background-color: #4f46e5; }
