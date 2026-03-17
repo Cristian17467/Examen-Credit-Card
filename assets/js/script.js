@@ -20,19 +20,15 @@ for (let i = 1980; i <= 2035; i++) {
     selectYear.add(new Option(i, yearValue));
 }
 
-// Lógica de Logos (¡Aparece SOLO a partir del octavo dígito!)
+// Lógica de Logos (Aparece a partir del octavo dígito)
 const updateBankLogo = (rawNumber) => {
-    // 1. Limpiamos los logos al inicio
     bankLogoDisplay.innerHTML = ''; 
     bankLogoBackDisplay.innerHTML = '';
 
-    // 2. SOLO actuamos cuando el usuario haya escrito 8 o más dígitos
     if (rawNumber.length >= 8) {
-        // Tomamos exactamente los primeros 8 dígitos (el "BIN" de la tarjeta)
         const bin = rawNumber.substring(0, 8);
         let svgLogo = '';
 
-        // Diccionario de Bancos: Aquí puedes agregar los primeros 8 dígitos de CUALQUIER banco
         const bankLogos = {
             '41523132': `<svg viewBox="0 0 100 30"><text x="0" y="25" font-family="Arial, sans-serif" font-weight="900" font-size="28" fill="#004481" letter-spacing="1">BBVA</text></svg>`,
             '55790700': `<svg viewBox="0 0 120 30"><text x="0" y="24" font-family="Arial, sans-serif" font-weight="bold" font-size="22" fill="#EC0000">Santander</text></svg>`,
@@ -42,20 +38,15 @@ const updateBankLogo = (rawNumber) => {
             '44315300': `<svg viewBox="0 0 80 30"><text x="0" y="25" font-family="Arial, sans-serif" font-weight="bold" font-size="26" fill="#DB0011">HSBC</text></svg>`
         };
 
-        // 3. Verificamos si los 8 dígitos están en nuestro diccionario
         if (bankLogos[bin]) {
             svgLogo = bankLogos[bin];
-        } 
-        // 4. Si es un banco desconocido, mostramos Visa o Mastercard según con qué número empiece
-        else {
+        } else {
             if (rawNumber.startsWith('4')) {
-                // Logo Visa (Colores originales)
                 svgLogo = `
                     <svg viewBox="0 0 50 16" fill="#1A1F71" width="100%" height="100%">
                         <path d="M22.064 0h3.585l-3.376 15.65h-3.584L22.064 0zm15.42 15.253c-3.18 0-5.419-1.637-5.433-3.982-.021-1.9 1.76-2.956 3.102-3.593 1.378-.654 1.84-1.071 1.833-1.652-.01-.892-1.11-1.285-2.14-1.3-1.423-.021-2.253.371-3.033.722l-.427.194-.482-2.888c.783-.35 2.217-.66 3.71-.671 3.364 0 5.56 1.597 5.58 4.07.02 1.082-.365 2.1-1.284 2.828-.62.486-1.895 1.041-2.67 1.455-1.258.65-1.503 1.074-1.493 1.66.012.83.992 1.25 2.215 1.25 1.157-.02 1.948-.256 2.66-.583l.36-.164.462 2.76c-.722.327-2.008.66-3.468.66zm-17.708-3.09l.666-3.197c.502-2.384.97-4.636 1.438-6.883h3.535l-5.636 13.567H16.03l-3.05-10.457c-.208-.737-.41-1.03-1.04-1.393L8.6 2.05v-.206h5.812c.742 0 1.423.515 1.59 1.34L17.556 8.7a85.83 85.83 0 0 1 1.033 5.467h.034l.872-4.113.28-1.31zM6.9 15.65H2.336L.003 0H4.55l2.35 15.65z"/>
                     </svg>`;
             } else if (rawNumber.startsWith('5')) {
-                // Logo Mastercard (Colores originales)
                 svgLogo = `
                     <svg viewBox="0 0 44 28" width="100%" height="100%">
                         <circle cx="14" cy="14" r="14" fill="#eb001b"/>
@@ -65,7 +56,6 @@ const updateBankLogo = (rawNumber) => {
             }
         }
 
-        // Insertar el logo en el HTML
         bankLogoDisplay.innerHTML = svgLogo;
         bankLogoBackDisplay.innerHTML = svgLogo;
     }
@@ -82,7 +72,6 @@ inputNumber.addEventListener('input', (e) => {
     const lastDigits = val.slice(-4);
     document.getElementById('card-last-digits').innerText = val.length >= 4 ? lastDigits : '####';
     
-    // Llamar a la función del logo pasándole los números puros
     updateBankLogo(val);
 });
 
