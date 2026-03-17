@@ -1,11 +1,12 @@
 :root {
-    --card-bg: linear-gradient(135deg, #bdc3c7, #2c3e50);
     --primary-color: #635bff;
+    --text-color: #425466;
+    --bg-color: #f6f9fc;
 }
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f7f9;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,95 +14,90 @@ body {
     margin: 0;
 }
 
-.payment-box {
-    display: flex;
+.container {
     background: white;
     padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    gap: 40px;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(50,50,93,0.1);
+    width: 900px;
 }
 
-/* --- ANIMACION TARJETA --- */
+.payment-wrapper {
+    display: flex;
+    gap: 50px; /* Separación entre tarjeta y formulario */
+    align-items: center;
+}
+
+/* --- Animación de la Tarjeta --- */
 .card-container {
     perspective: 1000px;
-    width: 350px;
-    height: 220px;
+    width: 400px;
 }
 
 .card {
     width: 100%;
-    height: 100%;
+    height: 250px;
     position: relative;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.6s;
     transform-style: preserve-3d;
+    border-radius: 15px;
+    color: #555;
 }
 
-/* Esta clase se añade con JS cuando el usuario hace focus en CVV */
 .card.flipped {
     transform: rotateY(180deg);
 }
 
-.card-face {
+.card-front, .card-back {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
+    background: #fff;
+    border: 1px solid #e6e6e6;
     border-radius: 15px;
-    padding: 20px;
+    padding: 25px;
     box-sizing: border-box;
-    color: white;
-    background: var(--card-bg);
 }
 
-.back {
+.card-back {
     transform: rotateY(180deg);
     padding: 0;
 }
 
-/* --- ESTILOS FRONT/BACK --- */
-.chip-icon { font-size: 40px; margin-bottom: 20px; }
-.card-number { font-size: 22px; letter-spacing: 2px; margin-bottom: 20px; }
+/* --- Detalles Internos Tarjeta --- */
+.chip-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.card-number-display { font-size: 24px; letter-spacing: 2px; margin-bottom: 30px; }
 .card-info { display: flex; justify-content: space-between; font-size: 12px; }
+.card-info span { display: block; color: #888; margin-bottom: 5px; }
 
-.magnetic-strip {
-    background: #333;
-    height: 40px;
-    width: 100%;
-    margin-top: 30px;
-}
+.black-strip { background: #adb5bd; height: 50px; width: 100%; margin-top: 30px; }
+.cvv-section { padding: 20px; text-align: right; }
+.cvv-box { background: white; border: 1px solid #ccc; padding: 10px; color: #000; }
+.disclaimer { font-size: 10px; padding: 0 20px; color: #777; }
 
-.cvv-bar {
-    background: white;
-    color: black;
-    height: 35px;
-    margin: 10px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding-right: 10px;
-}
-
-/* --- FORMULARIO --- */
-.form-container { width: 400px; }
+/* --- Formulario --- */
+.payment-form { flex: 1; color: var(--text-color); }
 .input-group { margin-bottom: 15px; }
-label { display: block; font-size: 13px; color: #555; margin-bottom: 5px; }
+label { display: block; font-weight: 600; margin-bottom: 5px; font-size: 14px; }
 input, select {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    padding: 12px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
     box-sizing: border-box;
 }
-.row { display: flex; gap: 10px; }
+.row { display: flex; gap: 20px; }
+.select-row { display: flex; gap: 10px; }
 .btn-pay {
     width: 100%;
     background: var(--primary-color);
     color: white;
     border: none;
     padding: 15px;
-    border-radius: 5px;
-    cursor: pointer;
+    border-radius: 4px;
+    font-size: 16px;
     font-weight: bold;
+    cursor: pointer;
     margin-top: 10px;
 }

@@ -4,76 +4,85 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Pago</title>
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="payment-box">
+
+<div class="container">
+    <div class="payment-wrapper">
+        
+        <div class="card-container">
+            <div class="card" id="card">
+                <div class="card-front">
+                    <div class="chip-row">
+                        <img src="https://cdn-icons-png.flaticon.com/512/6404/6404078.png" width="50" alt="chip">
+                        <img src="https://cdn-icons-png.flaticon.com/512/552/552403.png" width="40" alt="contactless">
+                    </div>
+                    <div class="card-number-display" id="card-num-display">#### #### #### ####</div>
+                    <div class="card-info">
+                        <div class="info-group">
+                            <span>TITULAR</span>
+                            <div id="card-name-display">NOMBRE COMPLETO</div>
+                        </div>
+                        <div class="info-group">
+                            <span>EXPIRACION</span>
+                            <div id="card-exp-display">MM/YY</div>
+                        </div>
+                        <div class="card-brand">
+                            <div class="circle-brand"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-back">
+                    <div class="black-strip"></div>
+                    <div class="cvv-section">
+                        <span>CVV</span>
+                        <div class="cvv-box" id="card-cvv-display">000</div>
+                    </div>
+                    <p class="disclaimer">Esta tarjeta es propiedad del banco emisor y es intransferible...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-form">
+            <h2>Detalles de Pago</h2>
+            <div class="input-group">
+                <label>Monto de Pago</label>
+                <input type="text" placeholder="$">
+            </div>
+            <div class="input-group">
+                <label>Número de Tarjeta</label>
+                <input type="text" id="input-number" maxlength="19" placeholder="1234 3478 9876 3657">
+            </div>
+            <div class="input-group">
+                <label>Titular de la Tarjeta</label>
+                <input type="text" id="input-name" placeholder="Nombre Completo">
+            </div>
             
-            <div class="card-container">
-                <div class="card" id="card">
-                    <div class="card-face front">
-                        <div class="chip-icon">💳</div>
-                        <div class="card-number" id="v-number">#### #### #### ####</div>
-                        <div class="card-info">
-                            <div class="info-group">
-                                <span>TITULAR</span>
-                                <div id="v-name">NOMBRE COMPLETO</div>
-                            </div>
-                            <div class="info-group">
-                                <span>EXPIRACION</span>
-                                <div id="v-expiry">MM/YY</div>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="input-group">
+                    <label>Fecha de Expiracion</label>
+                    <div class="select-row">
+                        <select id="select-month">
+                            <option value="" disabled selected>Día</option>
+                            </select>
+                        <select id="select-year">
+                            <option value="" disabled selected>Año</option>
+                            </select>
                     </div>
-                    <div class="card-face back">
-                        <div class="magnetic-strip"></div>
-                        <div class="cvv-bar">
-                            <span id="v-cvv">000</span>
-                        </div>
-                        <p class="disclaimer">Esta tarjeta es propiedad del banco emisor...</p>
-                    </div>
+                </div>
+                <div class="input-group">
+                    <label>CVV</label>
+                    <input type="text" id="input-cvv" maxlength="3" placeholder="000">
                 </div>
             </div>
 
-            <div class="form-container">
-                <h2>Detalles de Pago</h2>
-                <div class="input-group">
-                    <label>Monto de Pago</label>
-                    <input type="text" placeholder="$">
-                </div>
-                <div class="input-group">
-                    <label>Número de Tarjeta</label>
-                    <input type="text" id="i-number" maxlength="19" placeholder="1234 3478 9876 3657">
-                </div>
-                <div class="input-group">
-                    <label>Titular de la Tarjeta</label>
-                    <input type="text" id="i-name" placeholder="Nombre Completo">
-                </div>
-                <div class="row">
-                    <div class="input-group">
-                        <label>Fecha de Expiración</label>
-                        <div class="expiry-inputs">
-                            <select id="i-month">
-                                <option value="" disabled selected>Día</option>
-                                <option value="01">01</option>
-                                </select>
-                            <select id="i-year">
-                                <option value="" disabled selected>Año</option>
-                                <option value="25">2025</option>
-                                <option value="26">2026</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>CVV</label>
-                        <input type="text" id="i-cvv" maxlength="3" placeholder="000">
-                    </div>
-                </div>
-                <button class="btn-pay">Pagar Ahora</button>
-            </div>
+            <button class="btn-pay">Pagar Ahora</button>
         </div>
+
     </div>
-    <script src="assets/js/script.js"></script>
+</div>
+
+<script src="./assets/js/script.js"></script>
 </body>
 </html>

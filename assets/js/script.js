@@ -1,45 +1,49 @@
 const card = document.getElementById('card');
+const inputNumber = document.getElementById('input-number');
+const inputName = document.getElementById('input-name');
+const inputCVV = document.getElementById('input-cvv');
+const selectMonth = document.getElementById('select-month');
+const selectYear = document.getElementById('select-year');
 
-// Inputs
-const iNumber = document.getElementById('i-number');
-const iName = document.getElementById('i-name');
-const iMonth = document.getElementById('i-month');
-const iYear = document.getElementById('i-year');
-const iCVV = document.getElementById('i-cvv');
+// Llenar selectores de fecha
+for(let i = 1; i <= 31; i++) {
+    let opt = document.createElement('option');
+    opt.value = i < 10 ? '0'+i : i;
+    opt.innerHTML = i < 10 ? '0'+i : i;
+    selectMonth.appendChild(opt);
+}
+for(let i = 2024; i <= 2035; i++) {
+    let opt = document.createElement('option');
+    opt.value = i.toString().slice(-2);
+    opt.innerHTML = i;
+    selectYear.appendChild(opt);
+}
 
-// Visual Elements en la tarjeta
-const vNumber = document.getElementById('v-number');
-const vName = document.getElementById('v-name');
-const vExpiry = document.getElementById('v-expiry');
-const vCVV = document.getElementById('v-cvv');
-
-// Reflejar número
-iNumber.addEventListener('input', (e) => {
-    vNumber.innerText = e.target.value || "#### #### #### ####";
+// Actualizar Número (con espacios)
+inputNumber.addEventListener('input', (e) => {
+    let value = e.target.value.replace(/\D/g, '');
+    value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+    e.target.value = value;
+    document.getElementById('card-num-display').innerText = value || '#### #### #### ####';
 });
 
-// Reflejar nombre
-iName.addEventListener('input', (e) => {
-    vName.innerText = e.target.value.toUpperCase() || "NOMBRE COMPLETO";
+// Actualizar Nombre
+inputName.addEventListener('input', (e) => {
+    document.getElementById('card-name-display').innerText = e.target.value.toUpperCase() || 'NOMBRE COMPLETO';
 });
 
-// Reflejar Expiración
-const updateExpiry = () => {
-    vExpiry.innerText = `${iMonth.value || 'MM'}/${iYear.value || 'YY'}`;
+// Actualizar Expiración
+const updateExp = () => {
+    const m = selectMonth.value || 'MM';
+    const y = selectYear.value || 'YY';
+    document.getElementById('card-exp-display').innerText = `${m}/${y}`;
 };
-iMonth.addEventListener('change', updateExpiry);
-iYear.addEventListener('change', updateExpiry);
+selectMonth.addEventListener('change', updateExp);
+selectYear.addEventListener('change', updateExp);
 
-// Reflejar CVV
-iCVV.addEventListener('input', (e) => {
-    vCVV.innerText = e.target.value;
-});
-
-// GIRAR TARJETA
-iCVV.addEventListener('focus', () => {
-    card.classList.add('flipped');
-});
-
-iCVV.addEventListener('blur', () => {
-    card.classList.remove('flipped');
+// Giro de tarjeta al enfocar CVV
+inputCVV.addEventListener('focus', () => card.classList.add('flipped'));
+inputCVV.addEventListener('blur', () => card.classList.remove('flipped'));
+inputCVV.addEventListener('input', (e) => {
+    document.getElementById('card-cvv-display').innerText = e.target.value;
 });
