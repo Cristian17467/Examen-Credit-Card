@@ -24,24 +24,27 @@
     50% { opacity: 1; }
 }
 
+/* --- LAYOUT GENERAL MODIFICADO --- */
 body {
     background-color: var(--bg-page);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Columna para alinear navbar, contenido y footer */
+    min-height: 100vh;      /* Ocupa al menos toda la pantalla */
+    overflow-x: hidden;
+}
+
+.main-content {
+    flex-grow: 1; /* Permite que el contenido central se expanda y empuje el footer hacia abajo */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    padding-top: 80px; 
-    box-sizing: border-box;
-    overflow-x: hidden;
+    padding: 40px 20px;
 }
 
 /* --- BARRA DE NAVEGACIÓN --- */
 .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 80px;
     background-color: #ffffff;
@@ -64,13 +67,14 @@ body {
     display: flex; 
     gap: 60px; 
     align-items: center; 
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* --- TARJETA --- */
 .card-section { 
     width: 420px; 
     perspective: 1000px; 
-    /* Animación de entrada y luego levitación infinita */
     animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, 
                float 4s ease-in-out infinite 0.8s; 
 }
@@ -94,7 +98,6 @@ body {
 .card-front { background: var(--card-bg); color: var(--text-color); padding: 25px; display: flex; flex-direction: column; }
 .card-header { display: flex; justify-content: space-between; align-items: center; }
 
-/* Animación del ícono NFC */
 .nfc-icon-img path { animation: pulseWave 1.5s infinite; }
 .nfc-icon-img path:nth-child(1) { animation-delay: 0s; }
 .nfc-icon-img path:nth-child(2) { animation-delay: 0.2s; }
@@ -110,7 +113,6 @@ body {
 .label { color: #94a3b8; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
 .value { font-size: 15px; font-weight: 600; text-transform: uppercase; }
 
-/* CONTENEDOR LOGO FRENTE */
 .bank-logo-container {
     position: absolute;
     bottom: 22px;
@@ -136,7 +138,6 @@ body {
 
 .legal-text { font-size: 9px; color: #cbd5e1; margin-top: 20px; max-width: 65%; line-height: 1.4; } 
 
-/* CONTENEDOR LOGO DORSO */
 .logo-banco-back {
     position: absolute;
     bottom: 20px;
@@ -158,14 +159,13 @@ body {
 .payment-form { 
     width: 400px; 
     color: var(--text-dark); 
-    opacity: 0; /* Inicia oculto para la animación */
-    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards; /* Retraso */
+    opacity: 0; 
+    animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards; 
 }
 .form-title { margin: 0 0 25px 0; font-size: 26px; text-align: center; }
 .input-field { margin-bottom: 20px; }
 label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
 
-/* Transiciones de los inputs */
 input, select {
     width: 100%; padding: 14px 15px; background: #ffffff;
     border: 1px solid var(--input-border); border-radius: 8px; font-size: 15px;
@@ -181,7 +181,6 @@ input:focus, select:focus {
 .exp-group { flex: 2; } .cvv-group { flex: 1; }
 .select-wrapper { display: flex; gap: 10px; }
 
-/* Botón interactivo */
 .pay-button {
     width: 100%; background-color: var(--primary-btn); color: #ffffff;
     border: none; padding: 16px; border-radius: 8px; font-weight: 700; font-size: 16px;
@@ -196,4 +195,41 @@ input:focus, select:focus {
 .pay-button:active {
     transform: translateY(1px); 
     box-shadow: 0 2px 5px rgba(99, 102, 241, 0.3);
+}
+
+/* --- FOOTER DEL PROGRAMADOR (NUEVO) --- */
+.footer {
+    width: 100%;
+    background-color: #ffffff;
+    border-top: 1px solid var(--input-border);
+    padding: 25px 0;
+    text-align: center;
+    color: #475569;
+    font-size: 14px;
+    margin-top: auto; /* Se empuja hacia abajo si la pantalla es muy alta */
+}
+
+.footer-content p {
+    margin: 0 0 10px 0;
+}
+
+.footer-content strong {
+    color: var(--primary-btn);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--primary-btn);
 }

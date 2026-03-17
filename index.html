@@ -18,102 +18,115 @@
     </nav>
 </header>
 
-<div class="main-wrapper">
-    <div class="card-section">
-        <div class="card" id="card">
-            <div class="card-front">
-                <div class="card-header">
-                    <svg class="card-chip" viewBox="0 0 50 40" width="45" height="35" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="50" height="40" rx="6" fill="#e5c158" />
-                        <path d="M0 12h12v16H0zM38 12h12v16H38zM12 0h26v12H12zM12 28h26v12H12z" fill="#d4af37" opacity="0.8"/>
-                        <path d="M12 0v40M38 0v40M0 12h50M0 28h50M12 20h26" stroke="#9e7b23" stroke-width="1.5" fill="none"/>
-                        <rect x="18" y="14" width="14" height="12" rx="2" fill="#f3d573" />
-                    </svg>
+<main class="main-content">
+    <div class="main-wrapper">
+        <div class="card-section">
+            <div class="card" id="card">
+                <div class="card-front">
+                    <div class="card-header">
+                        <svg class="card-chip" viewBox="0 0 50 40" width="45" height="35" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="50" height="40" rx="6" fill="#e5c158" />
+                            <path d="M0 12h12v16H0zM38 12h12v16H38zM12 0h26v12H12zM12 28h26v12H12z" fill="#d4af37" opacity="0.8"/>
+                            <path d="M12 0v40M38 0v40M0 12h50M0 28h50M12 20h26" stroke="#9e7b23" stroke-width="1.5" fill="none"/>
+                            <rect x="18" y="14" width="14" height="12" rx="2" fill="#f3d573" />
+                        </svg>
+                        
+                        <svg class="nfc-icon-img" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e2e8f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4 10.5a2.5 2.5 0 0 1 0 3"/>
+                            <path d="M8 8.5a6.5 6.5 0 0 1 0 7"/>
+                            <path d="M12 6.5a10.5 10.5 0 0 1 0 11"/>
+                            <path d="M16 4.5a14.5 14.5 0 0 1 0 15"/>
+                        </svg>
+                    </div>
                     
-                    <svg class="nfc-icon-img" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#e2e8f0" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 10.5a2.5 2.5 0 0 1 0 3"/>
-                        <path d="M8 8.5a6.5 6.5 0 0 1 0 7"/>
-                        <path d="M12 6.5a10.5 10.5 0 0 1 0 11"/>
-                        <path d="M16 4.5a14.5 14.5 0 0 1 0 15"/>
-                    </svg>
-                </div>
-                
-                <div class="card-number-display" id="card-num-display">#### #### #### ####</div>
-                
-                <div class="card-footer">
-                    <div class="info-group titular">
-                        <span class="label">TITULAR</span>
-                        <div id="card-name-display" class="value">NOMBRE COMPLETO</div>
-                    </div>
-                    <div class="info-group expiracion">
-                        <span class="label">EXPIRACIÓN</span>
-                        <div id="card-exp-display" class="value">MM/YY</div>
-                    </div>
-                </div>
-                
-                <div class="bank-logo-container" id="bank-logo-display"></div>
-            </div>
-
-            <div class="card-back">
-                <div class="magnetic-strip"></div>
-                <div class="back-body">
-                    <div class="signature-row">
-                        <div class="world-icon">
-                            <svg viewBox="0 0 24 24" width="28" fill="#cbd5e1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                    <div class="card-number-display" id="card-num-display">#### #### #### ####</div>
+                    
+                    <div class="card-footer">
+                        <div class="info-group titular">
+                            <span class="label">TITULAR</span>
+                            <div id="card-name-display" class="value">NOMBRE COMPLETO</div>
                         </div>
-                        <div class="white-bar-container">
-                            <div class="signature-fill">
-                                <span id="card-last-digits">####</span>
+                        <div class="info-group expiracion">
+                            <span class="label">EXPIRACIÓN</span>
+                            <div id="card-exp-display" class="value">MM/YY</div>
+                        </div>
+                    </div>
+                    
+                    <div class="bank-logo-container" id="bank-logo-display"></div>
+                </div>
+
+                <div class="card-back">
+                    <div class="magnetic-strip"></div>
+                    <div class="back-body">
+                        <div class="signature-row">
+                            <div class="world-icon">
+                                <svg viewBox="0 0 24 24" width="28" fill="#cbd5e1"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
                             </div>
-                            <div class="cvv-box-display" id="card-cvv-display">000</div>
+                            <div class="white-bar-container">
+                                <div class="signature-fill">
+                                    <span id="card-last-digits">####</span>
+                                </div>
+                                <div class="cvv-box-display" id="card-cvv-display">000</div>
+                            </div>
+                            <span class="cvv-text-label">CVV</span>
                         </div>
-                        <span class="cvv-text-label">CVV</span>
+                        <p class="legal-text">Esta tarjeta es propiedad del banco emisor y es intransferible.</p>
+                        
+                        <div class="logo-banco-back" id="bank-logo-back-display"></div>
                     </div>
-                    <p class="legal-text">Esta tarjeta es propiedad del banco emisor y es intransferible.</p>
-                    
-                    <div class="logo-banco-back" id="bank-logo-back-display"></div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <div class="payment-form">
-        <h2 class="form-title">Detalles de Pago</h2>
-        
-        <div class="input-field">
-            <label>Monto de Pago</label>
-            <input type="text" placeholder="$">
-        </div>
-        <div class="input-field">
-            <label>Número de Tarjeta</label>
-            <input type="text" id="input-number" maxlength="19" placeholder="1234 3478 9876 3657">
-        </div>
-        <div class="input-field">
-            <label>Titular de la Tarjeta</label>
-            <input type="text" id="input-name" placeholder="Nombre Completo">
-        </div>
-        
-        <div class="form-row">
-            <div class="input-field exp-group">
-                <label>Fecha de Expiración</label>
-                <div class="select-wrapper">
-                    <select id="select-day">
-                        <option value="" disabled selected>Mes</option>
-                    </select>
-                    <select id="select-year">
-                        <option value="" disabled selected>Año</option>
-                    </select>
+        <div class="payment-form">
+            <h2 class="form-title">Detalles de Pago</h2>
+            
+            <div class="input-field">
+                <label>Monto de Pago</label>
+                <input type="text" placeholder="$">
+            </div>
+            <div class="input-field">
+                <label>Número de Tarjeta</label>
+                <input type="text" id="input-number" maxlength="19" placeholder="1234 3478 9876 3657">
+            </div>
+            <div class="input-field">
+                <label>Titular de la Tarjeta</label>
+                <input type="text" id="input-name" placeholder="Nombre Completo">
+            </div>
+            
+            <div class="form-row">
+                <div class="input-field exp-group">
+                    <label>Fecha de Expiración</label>
+                    <div class="select-wrapper">
+                        <select id="select-day">
+                            <option value="" disabled selected>Mes</option>
+                        </select>
+                        <select id="select-year">
+                            <option value="" disabled selected>Año</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-field cvv-group">
+                    <label>CVV</label>
+                    <input type="text" id="input-cvv" maxlength="3" placeholder="000">
                 </div>
             </div>
-            <div class="input-field cvv-group">
-                <label>CVV</label>
-                <input type="text" id="input-cvv" maxlength="3" placeholder="000">
-            </div>
-        </div>
 
-        <button class="pay-button">Pagar Ahora</button>
+            <button class="pay-button">Pagar Ahora</button>
+        </div>
     </div>
-</div>
+</main>
+
+<footer class="footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Desarrollado por <strong>[Tu Nombre]</strong> | Frontend Developer</p>
+        <div class="social-links">
+            <a href="#" target="_blank">GitHub</a>
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#" target="_blank">Portafolio</a>
+        </div>
+    </div>
+</footer>
 
 <script src="./assets/js/script.js"></script>
 </body>
