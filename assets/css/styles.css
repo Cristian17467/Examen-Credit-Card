@@ -89,8 +89,34 @@ body {
 .signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; font-family: monospace; font-size: 16px; }
 .cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #cbd5e1; font-weight: bold; color: var(--text-dark); }
 .cvv-text-label { font-size: 13px; font-weight: 700; color: var(--text-color); }
-/* Modificado para que no pise el logo en el dorso */
+
+/* Texto legal acotado para no pisar el logo */
 .legal-text { font-size: 9px; color: #cbd5e1; margin-top: 20px; max-width: 65%; line-height: 1.4; } 
+
+/* --- MODIFICACIÓN: Estilo específico para el logo trasero para que se mantenga dentro --- */
+.logo-banco-back {
+    /* Contenedor blanco idéntico al chip frontal para contraste */
+    background-color: white;
+    border-radius: 8px; /* Esquinas redondeadas como el chip */
+    padding: 5px; /* Padding interno */
+    
+    /* Reposicionamiento para que esté visible y no se caiga */
+    bottom: 25px; /* Misma distancia que el chip frontal desde su borde superior */
+    right: 30px; /* Misma distancia que el chip frontal desde su borde izquierdo */
+    
+    /* Asegurar que el contenido se centre y escale */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.logo-banco-back svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
 
 /* --- FORMULARIO --- */
 .payment-form { width: 400px; color: var(--text-dark); }
