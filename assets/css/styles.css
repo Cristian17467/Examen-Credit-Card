@@ -17,18 +17,18 @@ body {
 
 .main-wrapper {
     display: flex;
-    gap: 40px;
-    align-items: stretch;
+    gap: 60px; /* Aumentamos un poco el espacio entre la tarjeta y el formulario */
+    align-items: center;
 }
 
-/* --- BLOQUE IZQUIERDO: TARJETA TRANSPARENTE --- */
+/* --- BLOQUE IZQUIERDO: TARJETA FLOTANTE --- */
 .card-section {
     width: 420px;
     display: flex;
     align-items: center;
     justify-content: center;
     perspective: 1000px;
-    background: transparent; /* Hace que desaparezca el recuadro blanco */
+    background: transparent; /* Fondo transparente */
 }
 
 .card {
@@ -50,7 +50,7 @@ body {
     border: 1px solid #e2e8f0;
     box-sizing: border-box;
     background: #ffffff;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08); /* Sombra para que flote sola */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra elegante para que flote */
 }
 
 /* --- DETALLES DEL FRENTE --- */
@@ -68,12 +68,14 @@ body {
 }
 
 .card-chip {
-    width: 48px;
+    width: 45px;
     height: auto;
+    border-radius: 6px;
 }
 
-.nfc-icon {
-    color: #475569; /* Color gris oscuro para el NFC */
+.nfc-icon-img {
+    width: 28px;
+    height: auto;
     opacity: 0.8;
 }
 
@@ -83,7 +85,7 @@ body {
     color: var(--text-dark);
     text-align: left;
     margin: 15px 0;
-    font-family: monospace; /* Le da un toque más de tarjeta real */
+    font-family: monospace; 
 }
 
 .card-footer {
@@ -136,20 +138,19 @@ body {
 .footer-logo { display: flex; justify-content: flex-end; }
 .small-circle { width: 35px; height: 22px; background: #e2e8f0; border-radius: 4px; }
 
-/* --- BLOQUE DERECHO: FORMULARIO --- */
+/* --- BLOQUE DERECHO: FORMULARIO (SIN RECUADRO) --- */
 .payment-form {
-    width: 420px;
+    width: 400px;
     color: var(--text-dark);
-    background: white;
-    padding: 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04); /* Recuadro blanco solo para el formulario */
+    background: transparent; /* Quitamos el fondo blanco */
+    padding: 20px 0;
+    box-shadow: none; /* Quitamos la sombra */
 }
 
 .form-title {
     margin: 0 0 25px 0;
-    font-size: 24px;
-    text-align: center; /* Título centrado */
+    font-size: 26px;
+    text-align: left; /* Alineado a la izquierda para un look más moderno */
     color: #1e293b;
 }
 
@@ -157,9 +158,10 @@ body {
 label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
 input, select {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 15px;
     border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    background: #ffffff; /* Fondo blanco solo para los inputs */
+    border-radius: 8px;
     font-size: 15px;
     outline: none;
     transition: all 0.3s;
@@ -177,11 +179,12 @@ input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
     color: white;
     border: none;
     padding: 16px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 700;
     font-size: 16px;
     cursor: pointer;
     margin-top: 15px;
-    transition: background 0.3s;
+    transition: background 0.3s, transform 0.1s;
 }
 .pay-button:hover { background-color: #4f46e5; }
+.pay-button:active { transform: scale(0.98); }
