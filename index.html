@@ -13,18 +13,25 @@
         <div class="card" id="card">
             <div class="card-front">
                 <div class="card-header">
-                    <img src="https://i.ibb.co/377xW7N/chip-image.png" class="card-chip" alt="Chip de seguridad">
-                    <img src="https://i.ibb.co/6P0r7xJ/nfc-icon-white.png" class="nfc-icon-img" alt="Icono NFC">
+                    <svg class="card-chip" viewBox="0 0 50 40" width="45" height="35" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="50" height="40" rx="6" fill="#d4af37" />
+                        <path d="M0 15h15v10H0zM35 15h15v10H35zM15 0h20v10H15zM15 30h20v10H15z" fill="#c5a030" opacity="0.6"/>
+                        <path d="M15 10v20M35 10v20M10 15h30M10 25h30" stroke="#b8860b" stroke-width="1.5" fill="none"/>
+                    </svg>
+                    
+                    <svg class="nfc-icon-img" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#334155" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M5.5 16.5c-2.3-3.2-2.3-7.8 0-11M9 14.5c-1.2-1.9-1.2-4.1 0-6M12.5 12.5c-.3-.7-.3-1.3 0-2M16 19.5c4.8-5 4.8-12.5 0-17.5" />
+                    </svg>
                 </div>
                 
                 <div class="card-number-display" id="card-num-display">#### #### #### ####</div>
                 
                 <div class="card-footer">
-                    <div class="info-group">
+                    <div class="info-group titular">
                         <span class="label">TITULAR</span>
                         <div id="card-name-display" class="value">NOMBRE COMPLETO</div>
                     </div>
-                    <div class="info-group">
+                    <div class="info-group expiracion">
                         <span class="label">EXPIRACION</span>
                         <div id="card-exp-display" class="value">MM/YY</div>
                     </div>

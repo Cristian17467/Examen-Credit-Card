@@ -2,7 +2,7 @@
     --primary: #6366f1;
     --text-dark: #334155;
     --text-light: #94a3b8;
-    --bg-page: #f8fafc; /* Fondo gris muy claro de la página */
+    --bg-page: #f8fafc; 
 }
 
 body {
@@ -17,7 +17,7 @@ body {
 
 .main-wrapper {
     display: flex;
-    gap: 60px; /* Aumentamos un poco el espacio entre la tarjeta y el formulario */
+    gap: 60px; 
     align-items: center;
 }
 
@@ -28,7 +28,7 @@ body {
     align-items: center;
     justify-content: center;
     perspective: 1000px;
-    background: transparent; /* Fondo transparente */
+    background: transparent; 
 }
 
 .card {
@@ -50,7 +50,7 @@ body {
     border: 1px solid #e2e8f0;
     box-sizing: border-box;
     background: #ffffff;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); /* Sombra elegante para que flote */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); 
 }
 
 /* --- DETALLES DEL FRENTE --- */
@@ -68,24 +68,22 @@ body {
 }
 
 .card-chip {
-    width: 45px;
-    height: auto;
     border-radius: 6px;
 }
 
 .nfc-icon-img {
-    width: 28px;
-    height: auto;
     opacity: 0.8;
 }
 
+/* NÚMERO DE TARJETA CENTRADO */
 .card-number-display {
-    font-size: 24px;
-    letter-spacing: 2px;
+    font-size: 26px;
+    letter-spacing: 3px;
     color: var(--text-dark);
-    text-align: left;
-    margin: 15px 0;
+    text-align: center; /* Aquí centramos el número */
+    margin: 20px 0;
     font-family: monospace; 
+    width: 100%;
 }
 
 .card-footer {
@@ -95,6 +93,16 @@ body {
 }
 
 .info-group { flex: 1; }
+
+/* AJUSTES PARA MOVER LA EXPIRACIÓN MÁS ENFRENTE */
+.info-group.titular {
+    text-align: left;
+}
+.info-group.expiracion {
+    text-align: right; /* Lo alinea hacia el lado derecho */
+    padding-right: 15px; /* Un poco de margen para que no choque con el logo */
+}
+
 .label { color: var(--text-light); font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; }
 .value { font-size: 14px; font-weight: 500; color: var(--text-dark); }
 
@@ -138,19 +146,20 @@ body {
 .footer-logo { display: flex; justify-content: flex-end; }
 .small-circle { width: 35px; height: 22px; background: #e2e8f0; border-radius: 4px; }
 
-/* --- BLOQUE DERECHO: FORMULARIO (SIN RECUADRO) --- */
+/* --- BLOQUE DERECHO: FORMULARIO --- */
 .payment-form {
     width: 400px;
     color: var(--text-dark);
-    background: transparent; /* Quitamos el fondo blanco */
+    background: transparent; 
     padding: 20px 0;
-    box-shadow: none; /* Quitamos la sombra */
+    box-shadow: none; 
 }
 
+/* TÍTULO DEL FORMULARIO CENTRADO */
 .form-title {
     margin: 0 0 25px 0;
     font-size: 26px;
-    text-align: left; /* Alineado a la izquierda para un look más moderno */
+    text-align: center; 
     color: #1e293b;
 }
 
@@ -160,7 +169,7 @@ input, select {
     width: 100%;
     padding: 14px 15px;
     border: 1px solid #cbd5e1;
-    background: #ffffff; /* Fondo blanco solo para los inputs */
+    background: #ffffff; 
     border-radius: 8px;
     font-size: 15px;
     outline: none;
