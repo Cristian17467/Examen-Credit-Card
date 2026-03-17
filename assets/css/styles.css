@@ -1,11 +1,10 @@
 :root {
-    --primary: #ffd700;
-    --card-bg-color: #1a1a1a;
+    --bg-page: #f8fafc;
+    --card-bg: #1c1c1c; /* Tarjeta oscura */
     --text-color: #ffffff;
-    --bg-page: #f1f5f9; /* Fondo gris claro de la página */
-    --input-border: #cbd5e1;
     --text-dark: #1e293b;
-    --primary-btn: #6366f1; /* Color violeta/azul para el botón */
+    --input-border: #cbd5e1;
+    --primary-btn: #6366f1;
 }
 
 body {
@@ -24,14 +23,10 @@ body {
     align-items: center;
 }
 
-/* --- BLOQUE IZQUIERDO: TARJETA FLOTANTE --- */
+/* --- TARJETA --- */
 .card-section {
     width: 420px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     perspective: 1000px;
-    background: transparent;
 }
 
 .card {
@@ -50,18 +45,16 @@ body {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 16px;
-    border: 1px solid #333;
     box-sizing: border-box;
-    background: var(--card-bg-color); 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); 
-    color: var(--text-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15); 
 }
 
 .card-front {
+    background: var(--card-bg); 
+    color: var(--text-color);
     padding: 25px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
 }
 
 .card-header {
@@ -70,56 +63,61 @@ body {
     align-items: center;
 }
 
+/* NÚMERO CENTRADO Y DE IZQUIERDA A DERECHA */
 .card-number-display {
-    font-size: 22px;
-    letter-spacing: 2.5px;
-    text-align: left;
-    margin: 15px 0;
+    font-size: 24px;
+    letter-spacing: 3px;
+    text-align: center;
+    margin: 30px 0 20px 0; /* Espaciado para centrar verticalmente */
     font-family: monospace; 
+    direction: ltr; /* Asegura escritura de izquierda a derecha */
 }
 
-/* --- SEPARACIÓN ORDENADA: TITULAR Y EXPIRACIÓN --- */
+/* FOOTER: Titular y Expiración */
 .card-footer {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: flex-end;
-    gap: 15px; /* Crea una separación natural entre los elementos */
+    gap: 40px; /* Separación entre titular y expiración */
+    margin-top: auto;
+    position: relative;
 }
 
 .info-group.titular {
-    flex: 1; /* Ocupa el espacio disponible empujando la expiración */
-    text-align: left;
-    overflow: hidden;
+    max-width: 200px; /* Límite para forzar una línea */
 }
 
 #card-name-display {
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; /* Fuerza una sola línea */
+    overflow: hidden;    /* Oculta lo que sobra */
+    text-overflow: ellipsis; /* Pone "..." si es muy largo */
+    text-transform: uppercase;
 }
 
 .info-group.expiracion {
-    flex-shrink: 0;
-    text-align: right; /* Alinea el texto a la derecha de su contenedor */
-    padding-right: 10px;
+    text-align: left;
 }
 
 .label { color: #94a3b8; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
-.value { font-size: 14px; font-weight: 600; text-transform: uppercase; }
+.value { font-size: 15px; font-weight: 600; text-transform: uppercase; }
 
+/* LOGO DEL BANCO EN LA ESQUINA INFERIOR DERECHA */
 .bank-logo-container {
-    width: 50px;
-    height: 30px;
+    position: absolute;
+    bottom: 25px;
+    right: 25px;
+    width: 55px;
+    height: 35px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: flex-end;
 }
 
 .bank-logo-img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-/* --- DETALLES DEL REVERSO --- */
-.card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; background: #e2e8f0; color: #334155; border: 1px solid #cbd5e1; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
+/* --- REVERSO DE LA TARJETA --- */
+.card-back { transform: rotateY(180deg); padding: 0; background: #e2e8f0; color: #334155; }
 .magnetic-strip { background: #1e293b; height: 50px; width: 100%; margin-top: 25px; }
 .back-body { padding: 20px; }
 .signature-row { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
@@ -127,60 +125,30 @@ body {
 .signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; font-family: monospace; font-size: 16px; }
 .cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #cbd5e1; font-weight: bold; }
 .cvv-text-label { font-size: 13px; font-weight: 700; color: #334155; }
-.legal-text { font-size: 9px; color: #64748b; line-height: 1.4; margin-top: 20px; }
-.footer-logo { display: flex; justify-content: flex-end; }
-.small-circle { width: 35px; height: 22px; background: #cbd5e1; border-radius: 4px; }
+.legal-text { font-size: 9px; color: #64748b; margin-top: 20px; }
 
-/* --- BLOQUE DERECHO: FORMULARIO (Sin recuadro) --- */
+/* --- FORMULARIO --- */
 .payment-form {
     width: 400px;
-    background: transparent; /* Sin fondo sólido, toma el de la página */
-    box-shadow: none; /* Sin recuadro/sombra */
-    padding: 20px 0;
     color: var(--text-dark);
 }
 
-.form-title {
-    margin: 0 0 25px 0;
-    font-size: 26px;
-    text-align: center; 
-    color: var(--text-dark);
-}
-
+.form-title { margin: 0 0 25px 0; font-size: 26px; text-align: center; }
 .input-field { margin-bottom: 20px; }
 label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
 input, select {
-    width: 100%;
-    padding: 14px 15px;
-    background: #ffffff; /* Inputs blancos para contrastar con la página */
-    border: 1px solid var(--input-border);
-    color: var(--text-dark);
-    border-radius: 8px;
-    font-size: 15px;
-    outline: none;
-    transition: all 0.3s;
-    box-sizing: border-box;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    width: 100%; padding: 14px 15px; background: #ffffff;
+    border: 1px solid var(--input-border); border-radius: 8px; font-size: 15px;
+    outline: none; transition: all 0.3s; box-sizing: border-box;
 }
 input:focus, select:focus { border-color: var(--primary-btn); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
 .form-row { display: flex; gap: 15px; }
-.exp-group { flex: 2; }
-.cvv-group { flex: 1; }
+.exp-group { flex: 2; } .cvv-group { flex: 1; }
 .select-wrapper { display: flex; gap: 10px; }
 
 .pay-button {
-    width: 100%;
-    background-color: var(--primary-btn);
-    color: #ffffff;
-    border: none;
-    padding: 16px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 16px;
-    cursor: pointer;
-    margin-top: 15px;
-    transition: background 0.3s, transform 0.1s;
-    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
+    width: 100%; background-color: var(--primary-btn); color: #ffffff;
+    border: none; padding: 16px; border-radius: 8px; font-weight: 700; font-size: 16px;
+    cursor: pointer; margin-top: 15px; transition: 0.3s;
 }
 .pay-button:hover { background-color: #4f46e5; }
-.pay-button:active { transform: scale(0.98); }
