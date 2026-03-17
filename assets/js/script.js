@@ -1,85 +1,45 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Inputs del formulario
-    const cardNumberInput = document.getElementById('cardNumber');
-    const cardHolderInput = document.getElementById('cardHolder');
-    const expMonthSelect = document.getElementById('expirationMonth');
-    const expYearSelect = document.getElementById('expirationYear');
-    const cvvInput = document.getElementById('cardCVV');
+const card = document.getElementById('card');
 
-    // Elementos visuales de la tarjeta
-    const displayCardNumber = document.getElementById('displayCardNumber');
-    const displayCardHolder = document.getElementById('displayCardHolder');
-    const displayCardExpiration = document.getElementById('displayCardExpiration');
-    const displayCardCVV = document.getElementById('displayCardCVV');
-    const card = document.getElementById('card');
+// Inputs
+const iNumber = document.getElementById('i-number');
+const iName = document.getElementById('i-name');
+const iMonth = document.getElementById('i-month');
+const iYear = document.getElementById('i-year');
+const iCVV = document.getElementById('i-cvv');
 
-    // --- 1. Sincronizar Número de Tarjeta ---
-    cardNumberInput.addEventListener('input', (e) => {
-        let inputVal = e.target.value.replace(/\D/g, '');
-        let formattedVal = inputVal.match(/.{1,4}/g)?.join(' ') || '';
-        e.target.value = formattedVal;
-        
-        if (formattedVal === '') {
-            displayCardNumber.innerText = '#### #### #### ####';
-            displayCardNumber.classList.remove('filled');
-        } else {
-            displayCardNumber.innerText = formattedVal;
-            displayCardNumber.classList.add('filled');
-        }
-    });
+// Visual Elements en la tarjeta
+const vNumber = document.getElementById('v-number');
+const vName = document.getElementById('v-name');
+const vExpiry = document.getElementById('v-expiry');
+const vCVV = document.getElementById('v-cvv');
 
-    // --- 2. Sincronizar Titular de la Tarjeta ---
-    cardHolderInput.addEventListener('input', (e) => {
-        let inputVal = e.target.value.toUpperCase();
-        
-        if (inputVal === '') {
-            displayCardHolder.innerText = 'NOMBRE COMPLETO';
-            displayCardHolder.classList.remove('filled');
-        } else {
-            displayCardHolder.innerText = inputVal;
-            displayCardHolder.classList.add('filled');
-        }
-    });
+// Reflejar número
+iNumber.addEventListener('input', (e) => {
+    vNumber.innerText = e.target.value || "#### #### #### ####";
+});
 
-    // --- 3. Sincronizar Fecha de Expiración ---
-    function updateExpiry() {
-        let m = expMonthSelect.value || 'MM';
-        let y = expYearSelect.value || 'YY';
-        displayCardExpiration.innerText = `${m}/${y}`;
-        
-        if (m !== 'MM' || y !== 'YY') {
-            displayCardExpiration.classList.add('filled');
-        } else {
-            displayCardExpiration.classList.remove('filled');
-        }
-    }
-    expMonthSelect.addEventListener('change', updateExpiry);
-    expYearSelect.addEventListener('change', updateExpiry);
+// Reflejar nombre
+iName.addEventListener('input', (e) => {
+    vName.innerText = e.target.value.toUpperCase() || "NOMBRE COMPLETO";
+});
 
-    // --- 4. Girar la tarjeta y actualizar CVV ---
-    cvvInput.addEventListener('focus', () => {
-        card.classList.add('flipped');
-    });
+// Reflejar Expiración
+const updateExpiry = () => {
+    vExpiry.innerText = `${iMonth.value || 'MM'}/${iYear.value || 'YY'}`;
+};
+iMonth.addEventListener('change', updateExpiry);
+iYear.addEventListener('change', updateExpiry);
 
-    cvvInput.addEventListener('blur', () => {
-        card.classList.remove('flipped');
-    });
+// Reflejar CVV
+iCVV.addEventListener('input', (e) => {
+    vCVV.innerText = e.target.value;
+});
 
-    cvvInput.addEventListener('input', (e) => {
-        let inputVal = e.target.value.replace(/\D/g, '');
-        e.target.value = inputVal;
-        displayCardCVV.innerText = inputVal !== '' ? inputVal : '000';
-    });
+// GIRAR TARJETA
+iCVV.addEventListener('focus', () => {
+    card.classList.add('flipped');
+});
 
-    // --- Funcionalidad del ojo ---
-    const eyeIcon = document.querySelector('.eye-icon');
-    eyeIcon.addEventListener('click', () => {
-        if (cvvInput.type === 'text') {
-            cvvInput.type = 'password';
-            eyeIcon.style.stroke = '#4a5568';
-        } else {
-            cvvInput.type = 'text';
-            eyeIcon.style.stroke = '#a0aec0';
-        }
-    });
+iCVV.addEventListener('blur', () => {
+    card.classList.remove('flipped');
 });

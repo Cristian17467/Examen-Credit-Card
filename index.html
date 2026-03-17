@@ -4,134 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles de Pago</title>
-    <link rel="stylesheet" href="./assets/css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <div class="page-container">
-        <div class="browser-header">
-            <div class="circles">
-                <span></span><span></span><span></span>
-            </div>
-            <div class="url-bar"></div>
-        </div>
-
-        <div class="payment-app">
-            <div class="card-display">
+    <div class="container">
+        <div class="payment-box">
+            
+            <div class="card-container">
                 <div class="card" id="card">
-                    <div class="card-inner">
-                        <div class="card-front">
-                            <div class="card-icons">
-                                <svg class="chip-icon" viewBox="0 0 50 50" width="40" height="40">
-                                    <rect width="50" height="40" rx="8" fill="#d4af37"/>
-                                    <path d="M10 0v40M20 0v40M30 0v40M40 0v40M0 10h50M0 20h50M0 30h50" stroke="#b5952f" stroke-width="1.5"/>
-                                </svg>
-                                <svg class="contactless-icon" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round">
-                                    <path d="M8.5 21.5c-2.8-3-4.5-7-4.5-11.5S5.7 1.5 8.5-1.5M12 18.5c-2-2.3-3.2-5.3-3.2-8.5s1.2-6.2 3.2-8.5M15.5 15.5c-1.2-1.6-1.9-3.6-1.9-5.5s.7-3.9 1.9-5.5M19 12.5a4 4 0 000-5"/>
-                                </svg>
+                    <div class="card-face front">
+                        <div class="chip-icon">💳</div>
+                        <div class="card-number" id="v-number">#### #### #### ####</div>
+                        <div class="card-info">
+                            <div class="info-group">
+                                <span>TITULAR</span>
+                                <div id="v-name">NOMBRE COMPLETO</div>
                             </div>
-                            
-                            <div class="card-number" id="displayCardNumber">
-                                #### #### #### ####
-                            </div>
-                            
-                            <div class="card-details">
-                                <div class="card-holder">
-                                    <label>TITULAR</label>
-                                    <div class="value" id="displayCardHolder">NOMBRE COMPLETO</div>
-                                </div>
-                                <div class="card-expiration">
-                                    <label>EXPIRACION</label>
-                                    <div class="value" id="displayCardExpiration">MM/YY</div>
-                                </div>
-                                <svg class="card-logo" viewBox="0 0 100 60" width="50" height="30">
-                                    <circle cx="30" cy="30" r="30" fill="#eb001b" opacity="0.8"/>
-                                    <circle cx="70" cy="30" r="30" fill="#f79e1b" opacity="0.8"/>
-                                </svg>
+                            <div class="info-group">
+                                <span>EXPIRACION</span>
+                                <div id="v-expiry">MM/YY</div>
                             </div>
                         </div>
-
-                        <div class="card-back">
-                            <div class="magnetic-stripe"></div>
-                            <div class="card-back-content">
-                                <svg class="world-logo" viewBox="0 0 24 24" width="35" height="35" fill="none" stroke="#a0aec0" stroke-width="1.5">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/>
-                                </svg>
-                                
-                                <div class="signature-bar">
-                                    <span class="signature-pattern"></span>
-                                    <div class="cvv-box">
-                                        <span id="displayCardCVV">000</span>
-                                    </div>
-                                    <label class="cvv-label">CVV</label>
-                                </div>
-                            </div>
-                            <div class="disclaimer">
-                                Esta tarjeta es propiedad del banco emisor y es intransferible. Su uso implica la aceptación de los términos y condiciones establecidos en el contrato correspondiente.
-                            </div>
+                    </div>
+                    <div class="card-face back">
+                        <div class="magnetic-strip"></div>
+                        <div class="cvv-bar">
+                            <span id="v-cvv">000</span>
                         </div>
+                        <p class="disclaimer">Esta tarjeta es propiedad del banco emisor...</p>
                     </div>
                 </div>
             </div>
 
-            <div class="payment-details">
-                <h1>Detalles de Pago</h1>
-                <form id="paymentForm">
-                    <div class="form-group">
-                        <label>Monto de Pago</label>
-                        <input type="text" placeholder="$">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Número de Tarjeta</label>
-                        <input type="text" id="cardNumber" placeholder="1234 3478 9876 3657" maxlength="19">
-                    </div>
-
-                    <div class="form-group">
-                        <label>Titular de la Tarjeta</label>
-                        <input type="text" id="cardHolder" placeholder="Nombre Completo" maxlength="25">
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-expiry">
-                            <label>Fecha de Expiración</label>
-                            <div class="expiry-inputs">
-                                <select id="expirationMonth">
-                                    <option value="" disabled selected>Mes</option>
-                                    <option value="01">01</option><option value="02">02</option>
-                                    <option value="03">03</option><option value="04">04</option>
-                                    <option value="05">05</option><option value="06">06</option>
-                                    <option value="07">07</option><option value="08">08</option>
-                                    <option value="09">09</option><option value="10">10</option>
-                                    <option value="11">11</option><option value="12">12</option>
+            <div class="form-container">
+                <h2>Detalles de Pago</h2>
+                <div class="input-group">
+                    <label>Monto de Pago</label>
+                    <input type="text" placeholder="$">
+                </div>
+                <div class="input-group">
+                    <label>Número de Tarjeta</label>
+                    <input type="text" id="i-number" maxlength="19" placeholder="1234 3478 9876 3657">
+                </div>
+                <div class="input-group">
+                    <label>Titular de la Tarjeta</label>
+                    <input type="text" id="i-name" placeholder="Nombre Completo">
+                </div>
+                <div class="row">
+                    <div class="input-group">
+                        <label>Fecha de Expiración</label>
+                        <div class="expiry-inputs">
+                            <select id="i-month">
+                                <option value="" disabled selected>Día</option>
+                                <option value="01">01</option>
                                 </select>
-                                <select id="expirationYear">
-                                    <option value="" disabled selected>Año</option>
-                                    <option value="24">2024</option><option value="25">2025</option>
-                                    <option value="26">2026</option><option value="27">2027</option>
-                                    <option value="28">2028</option><option value="29">2029</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group col-cvv">
-                            <label>CVV</label>
-                            <div class="cvv-input-container">
-                                <input type="text" id="cardCVV" placeholder="000" maxlength="4">
-                                <svg class="eye-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#a0aec0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                    <circle cx="12" cy="12" r="3"></circle>
-                                </svg>
-                            </div>
+                            <select id="i-year">
+                                <option value="" disabled selected>Año</option>
+                                <option value="25">2025</option>
+                                <option value="26">2026</option>
+                            </select>
                         </div>
                     </div>
-
-                    <button type="button" class="btn-pay">Pagar Ahora</button>
-                </form>
+                    <div class="input-group">
+                        <label>CVV</label>
+                        <input type="text" id="i-cvv" maxlength="3" placeholder="000">
+                    </div>
+                </div>
+                <button class="btn-pay">Pagar Ahora</button>
             </div>
         </div>
     </div>
-    <script src="./assets/js/script.js"></script>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>
