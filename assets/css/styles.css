@@ -115,8 +115,6 @@ select.glass-input option { background: var(--bg-dark); color: white; }
 }
 
 /* --- ESTILOS EXTRA PARA NAVBAR Y FOOTER PREMIUM --- */
-
-/* Animación de subrayado en el menú */
 .custom-nav-link { 
     position: relative; 
     transition: all 0.3s ease; 
@@ -130,7 +128,6 @@ select.glass-input option { background: var(--bg-dark); color: white; }
 }
 .custom-nav-link:hover::after { width: 70%; }
 
-/* Botón de Carrito Glassmorphism */
 .glass-btn {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -144,7 +141,6 @@ select.glass-input option { background: var(--bg-dark); color: white; }
     color: white;
 }
 
-/* Íconos sociales del Footer */
 .footer-link {
     color: rgba(255, 255, 255, 0.4);
     transition: all 0.3s ease;
@@ -154,59 +150,10 @@ select.glass-input option { background: var(--bg-dark); color: white; }
     transform: translateY(-4px) scale(1.1);
     filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.6));
 }
+
 /* =========================================
-   RESPONSIVIDAD MÓVIL (MEDIA QUERIES)
+   OJO DEL CVV (NUEVO)
 ========================================= */
-
-@media (max-width: 576px) {
-    /* Dar un poco más de aire en la parte superior en móviles */
-    main {
-        padding-top: 85px !important;
-        padding-bottom: 20px !important;
-    }
-
-    /* Escalar la tarjeta 3D para que no se desborde en pantallas pequeñas */
-    .card-section {
-        width: 100%;
-        /* Usamos scale para encogerla sin romper su diseño interno */
-        transform: scale(0.9);
-        transform-origin: center top;
-        margin-bottom: -15px; /* Compensa el espacio vacío dejado al escalar */
-        /* Reemplazamos la animación de flote para que respete la escala */
-        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatMobile 5s ease-in-out infinite 0.8s;
-    }
-
-    /* Nueva animación de flote exclusiva para móviles */
-    @keyframes floatMobile { 
-        0% { transform: translateY(0px) scale(0.9); } 
-        50% { transform: translateY(-8px) scale(0.9); } 
-        100% { transform: translateY(0px) scale(0.9); } 
-    }
-
-    /* Reducir el padding interno del formulario para ganar espacio */
-    .payment-form {
-        padding: 1.5rem !important;
-    }
-
-    /* Ajustar el footer para que el texto se apile elegante si no cabe */
-    .footer-brand {
-        flex-direction: column;
-        gap: 4px !important;
-        text-align: center;
-    }
-    .footer-brand span:nth-child(2) { 
-        display: none; /* Ocultamos la barrita vertical "|" en móviles */
-    }
-}
-
-/* Ajuste intermedio para tablets pequeñas */
-@media (min-width: 577px) and (max-width: 768px) {
-    .card-section {
-        transform: scale(0.95);
-        transform-origin: center;
-        margin-bottom: 10px;
-    }
-}
 #toggle-cvv {
     z-index: 10;
     cursor: pointer;
@@ -214,17 +161,65 @@ select.glass-input option { background: var(--bg-dark); color: white; }
     align-items: center;
     justify-content: center;
 }
+#toggle-cvv:focus { box-shadow: none; }
+#eye-icon { transition: all 0.2s ease; font-size: 1.1rem; }
+#eye-icon:hover { color: #c084fc !important; transform: scale(1.1); }
 
-#toggle-cvv:focus {
-    box-shadow: none; /* Quita el borde de enfoque de Bootstrap */
+/* =========================================
+   ANIMACIÓN DE PAGO EXITOSO Y OVERLAY (NUEVO)
+========================================= */
+.success-overlay { 
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+    background: rgba(15, 23, 42, 0.85); z-index: 9999; 
+    display: flex; align-items: center; justify-content: center; 
+    backdrop-filter: blur(10px); 
+}
+.success-content { 
+    padding: 50px; border-radius: 20px; text-align: center; 
+    animation: fadeInUp 0.5s ease; width: 90%; max-width: 400px;
+}
+.check-container { width: 100px; height: 100px; margin: 0 auto; }
+.checkmark { 
+    width: 100%; height: 100%; 
+    stroke: #10b981; 
+    stroke-width: 6; 
+    stroke-linecap: round; stroke-linejoin: round; 
+}
+.checkmark-circle {
+    stroke-dasharray: 300; stroke-dashoffset: 300;
+    animation: drawCheck 1s forwards ease-out;
+}
+.checkmark-check {
+    stroke-dasharray: 100; stroke-dashoffset: 100;
+    animation: drawCheck 0.5s forwards ease-out 0.5s; 
+}
+@keyframes drawCheck { 
+    0% { stroke-dashoffset: 300; } 
+    100% { stroke-dashoffset: 0; } 
 }
 
-#eye-icon {
-    transition: all 0.2s ease;
-    font-size: 1.1rem;
+/* =========================================
+   RESPONSIVIDAD MÓVIL (MEDIA QUERIES)
+========================================= */
+@media (max-width: 576px) {
+    main { padding-top: 85px !important; padding-bottom: 20px !important; }
+    .card-section {
+        width: 100%;
+        transform: scale(0.9);
+        transform-origin: center top;
+        margin-bottom: -15px; 
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatMobile 5s ease-in-out infinite 0.8s;
+    }
+    @keyframes floatMobile { 
+        0% { transform: translateY(0px) scale(0.9); } 
+        50% { transform: translateY(-8px) scale(0.9); } 
+        100% { transform: translateY(0px) scale(0.9); } 
+    }
+    .payment-form { padding: 1.5rem !important; }
+    .footer-brand { flex-direction: column; gap: 4px !important; text-align: center; }
+    .footer-brand span:nth-child(2) { display: none; }
 }
 
-#eye-icon:hover {
-    color: #c084fc !important; /* El color morado de tu marca */
-    transform: scale(1.1);
+@media (min-width: 577px) and (max-width: 768px) {
+    .card-section { transform: scale(0.95); transform-origin: center; margin-bottom: 10px; }
 }

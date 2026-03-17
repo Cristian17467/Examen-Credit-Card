@@ -8,6 +8,16 @@ const selectYear = document.getElementById('select-year');
 const bankLogoDisplay = document.getElementById('bank-logo-display');
 const bankLogoBackDisplay = document.getElementById('bank-logo-back-display');
 
+// Elementos nuevos
+const btnToggleCVV = document.getElementById('toggle-cvv');
+const eyeIcon = document.getElementById('eye-icon');
+const displayCVV = document.getElementById('card-cvv-display');
+
+const inputAmount = document.getElementById('input-amount');
+const cartAmountDisplay = document.getElementById('cart-amount-display');
+const btnPay = document.getElementById('btn-pay');
+const successOverlay = document.getElementById('success-overlay');
+
 // Generar meses (01 al 12)
 for (let i = 1; i <= 12; i++) {
     let d = i < 10 ? '0' + i : i;
@@ -20,7 +30,7 @@ for (let i = 1980; i <= 2035; i++) {
     selectYear.add(new Option(i, yearValue));
 }
 
-// Lógica de Logos Dinámicos (A partir del 8vo dígito)
+// Lógica de Logos Dinámicos
 const updateBankLogo = (rawNumber) => {
     bankLogoDisplay.innerHTML = ''; 
     bankLogoBackDisplay.innerHTML = '';
@@ -41,7 +51,6 @@ const updateBankLogo = (rawNumber) => {
         if (bankLogos[bin]) {
             svgLogo = bankLogos[bin];
         } else {
-            // Logos Genéricos para Visa y Mastercard
             if (rawNumber.startsWith('4')) {
                 svgLogo = `
                     <svg viewBox="0 0 50 16" fill="#ffffff" width="100%" height="100%">
@@ -90,12 +99,97 @@ const updateDate = () => {
 selectDay.addEventListener('change', updateDate);
 selectYear.addEventListener('change', updateDate);
 
+// Lógica del Ojo del CVV
+function updateCVVDisplay() {
+    const val = inputCVV.value;
+    if (inputCVV.getAttribute('type') === 'password') {
+        displayCVV.innerText = '●'.repeat(val.length) || '000';
+    } else {
+        displayCVV.innerText = val || '000';
+    }
+}
+
+btnToggleCVV.addEventListener('click', () => {
+    const isPassword = inputCVV.getAttribute('type') === 'password';
+    inputCVV.setAttribute('type', isPassword ? 'text' : 'password');
+    eyeIcon.classList.toggle('bi-eye');
+    eyeIcon.classList.toggle('bi-eye-slash');
+    updateCVVDisplay();
+});
+
 // Animación de Giro y actualización de CVV
 inputCVV.addEventListener('focus', () => card.classList.add('flipped'));
 inputCVV.addEventListener('blur', () => card.classList.remove('flipped'));
 inputCVV.addEventListener('input', (e) => {
     let val = e.target.value.replace(/\D/g, ''); 
     e.target.value = val;
-    document.getElementById('card-cvv-display').innerText = val || '000';
+    updateCVVDisplay();
 });
 
+// Carrito en tiempo real
+inputAmount.addEventListener('input', (e) => {
+    let val = e.target.value.replace(/[^0-9.]/g, ''); 
+    if(val) {
+        cartAmountDisplay.innerText = `$ ${val}`;
+    } else {
+        cartAmountDisplay.innerText = '$ 0.00';
+    }
+});
+
+// Procesar el Pago, mostrar Palomita y descargar PDF
+btnPay.addEventListener('click', (e) => {
+    e.preventDefault();
+
+    if(!inputAmount.value || !inputNumber.value) {
+        alert("Por favor, ingresa al menos el Monto y el Número de Tarjeta para proceder.");
+        return;
+    }
+
+    successOverlay.classList.remove('d-none');
+
+    const amountVal = cartAmountDisplay.innerText;
+    const nameVal = inputName.value || 'Cliente General';
+    const cardRaw = inputNumber.value.replace(/\s/g, '');
+    const last4Val = cardRaw.length >= 4 ? cardRaw.slice(-4) : '####';
+    
+    const fecha = new Date();
+    const dateVal = fecha.toLocaleDateString() + ' ' + fecha.toLocaleTimeString();
+
+    document.getElementById('receipt-name').innerText = nameVal;
+    document.getElementById('receipt-card').innerText = last4Val;
+    document.getElementById('receipt-amount').innerText = amountVal;
+    document.getElementById('receipt-date').innerText = dateVal;
+
+    const qrContainer = document.getElementById('qrcode');
+    qrContainer.innerHTML = ''; 
+    
+    const urlFacturacion = `https://tupagina.com/facturar?monto=${amountVal.replace(/[^0-9.]/g, '')}&tarjeta=${last4Val}`;
+    
+    new QRCode(qrContainer, {
+        text: urlFacturacion,
+        width: 120,
+        height: 120,
+        colorDark : "#0f172a",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    setTimeout(() => {
+        const receiptElement = document.getElementById('receipt-template');
+        
+        const opt = {
+            margin:       10,
+            filename:     `Boucher_SecurePay_${last4Val}.pdf`,
+            image:        { type: 'jpeg', quality: 0.98 },
+            html2canvas:  { scale: 2 },
+            jsPDF:        { unit: 'mm', format: 'a5', orientation: 'portrait' }
+        };
+
+        html2pdf().set(opt).from(receiptElement).save().then(() => {
+            setTimeout(() => {
+                successOverlay.classList.add('d-none');
+            }, 1500);
+        });
+
+    }, 2000); 
+});
