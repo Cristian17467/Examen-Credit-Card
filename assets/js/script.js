@@ -18,37 +18,38 @@ for (let i = 1980; i <= 2035; i++) {
     selectYear.add(new Option(i, yearValue));
 }
 
-// Lógica para detectar red de tarjeta y mostrar logo SOLO si hay 8 o más dígitos
+// Lógica de Logos (¡Aparece DESDE EL PRIMER DÍGITO!)
 const updateBankLogo = (rawNumber) => {
-    bankLogoDisplay.innerHTML = ''; // Limpiar logo por defecto
+    bankLogoDisplay.innerHTML = ''; 
     
-    // Condición: Mostrar logo solo al ingresar 8 o más dígitos
-    if (rawNumber.length >= 8) {
-        let logoSrc = '';
-
+    // Condición cambiada a >= 1 para que el logo se vea de inmediato
+    if (rawNumber.length >= 1) {
         if (rawNumber.startsWith('4')) {
-            // Visa
-            logoSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Visa_2014.svg/200px-Visa_2014.svg.png';
+            // Logo Visa
+            bankLogoDisplay.innerHTML = `
+                <svg viewBox="0 0 50 16" fill="#ffffff" width="100%" height="100%">
+                    <path d="M22.064 0h3.585l-3.376 15.65h-3.584L22.064 0zm15.42 15.253c-3.18 0-5.419-1.637-5.433-3.982-.021-1.9 1.76-2.956 3.102-3.593 1.378-.654 1.84-1.071 1.833-1.652-.01-.892-1.11-1.285-2.14-1.3-1.423-.021-2.253.371-3.033.722l-.427.194-.482-2.888c.783-.35 2.217-.66 3.71-.671 3.364 0 5.56 1.597 5.58 4.07.02 1.082-.365 2.1-1.284 2.828-.62.486-1.895 1.041-2.67 1.455-1.258.65-1.503 1.074-1.493 1.66.012.83.992 1.25 2.215 1.25 1.157-.02 1.948-.256 2.66-.583l.36-.164.462 2.76c-.722.327-2.008.66-3.468.66zm-17.708-3.09l.666-3.197c.502-2.384.97-4.636 1.438-6.883h3.535l-5.636 13.567H16.03l-3.05-10.457c-.208-.737-.41-1.03-1.04-1.393L8.6 2.05v-.206h5.812c.742 0 1.423.515 1.59 1.34L17.556 8.7a85.83 85.83 0 0 1 1.033 5.467h.034l.872-4.113.28-1.31zM6.9 15.65H2.336L.003 0H4.55l2.35 15.65z"/>
+                </svg>`;
         } else if (rawNumber.startsWith('5')) {
-            // Mastercard
-            logoSrc = 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/200px-Mastercard-logo.svg.png';
-        }
-
-        if (logoSrc) {
-            bankLogoDisplay.innerHTML = `<img src="${logoSrc}" class="bank-logo-img" alt="Banco">`;
+            // Logo Mastercard
+            bankLogoDisplay.innerHTML = `
+                <svg viewBox="0 0 44 28" width="100%" height="100%">
+                    <circle cx="14" cy="14" r="14" fill="#eb001b"/>
+                    <circle cx="30" cy="14" r="14" fill="#f79e1b"/>
+                    <path d="M22 25.12a13.94 13.94 0 0 0 0-22.24 13.94 13.94 0 0 0 0 22.24z" fill="#ff5f00"/>
+                </svg>`;
         }
     }
 };
 
-// Formatear número de tarjeta y actualizar visual de Izquierda a Derecha
+// Formatear número de tarjeta
 inputNumber.addEventListener('input', (e) => {
-    let val = e.target.value.replace(/\D/g, ''); // Solo números
-    let formatted = val.replace(/(\d{4})(?=\d)/g, '$1 ').trim(); // Espacios cada 4
+    let val = e.target.value.replace(/\D/g, ''); 
+    let formatted = val.replace(/(\d{4})(?=\d)/g, '$1 ').trim(); 
     e.target.value = formatted;
 
     document.getElementById('card-num-display').innerText = formatted || '#### #### #### ####';
     
-    // Últimos 4 dígitos para el reverso
     const lastDigits = val.slice(-4);
     document.getElementById('card-last-digits').innerText = val.length >= 4 ? lastDigits : '####';
     
