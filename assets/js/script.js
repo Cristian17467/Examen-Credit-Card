@@ -20,7 +20,7 @@ for (let i = 1980; i <= 2035; i++) {
     selectYear.add(new Option(i, yearValue));
 }
 
-// Lógica de Logos (Aparece a partir del octavo dígito)
+// Lógica de Logos Dinámicos (A partir del 8vo dígito)
 const updateBankLogo = (rawNumber) => {
     bankLogoDisplay.innerHTML = ''; 
     bankLogoBackDisplay.innerHTML = '';
