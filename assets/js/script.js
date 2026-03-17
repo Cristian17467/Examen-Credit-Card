@@ -36,8 +36,6 @@ const updateBankLogo = (rawNumber) => {
 
         if (logoSrc) {
             bankLogoDisplay.innerHTML = `<img src="${logoSrc}" class="bank-logo-img" alt="${altText}">`;
-        } else {
-            bankLogoDisplay.innerHTML = '<span class="bank-text-fallback">BANK</span>';
         }
     }
 };

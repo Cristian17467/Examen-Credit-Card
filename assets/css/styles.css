@@ -1,11 +1,11 @@
 :root {
-    --primary: #ffd700; /* Dorado para detalles premium */
-    --card-bg-color: #1a1a1a; /* Negro premium de la tarjeta */
-    --text-color: #ffd700; /* Texto dorado en la tarjeta */
-    --bg-page: #f8fafc; /* Fondo general de la página web */
-    --form-bg-color: #262626; /* Gris oscuro para el formulario */
-    --form-border-color: #404040;
-    --form-text-color: #e5e5e5;
+    --primary: #ffd700;
+    --card-bg-color: #1a1a1a;
+    --text-color: #ffffff;
+    --bg-page: #f1f5f9; /* Fondo gris claro de la página */
+    --input-border: #cbd5e1;
+    --text-dark: #1e293b;
+    --primary-btn: #6366f1; /* Color violeta/azul para el botón */
 }
 
 body {
@@ -31,7 +31,7 @@ body {
     align-items: center;
     justify-content: center;
     perspective: 1000px;
-    background: transparent; 
+    background: transparent;
 }
 
 .card {
@@ -53,11 +53,10 @@ body {
     border: 1px solid #333;
     box-sizing: border-box;
     background: var(--card-bg-color); 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); 
     color: var(--text-color);
 }
 
-/* --- DETALLES DEL FRENTE --- */
 .card-front {
     padding: 25px;
     display: flex;
@@ -71,53 +70,42 @@ body {
     align-items: center;
 }
 
-/* Contenedor para centrar el número pero escribir de izquierda a derecha */
-.card-number-container {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 15px 0;
-}
-
 .card-number-display {
-    font-size: 24px;
-    letter-spacing: 3px;
+    font-size: 22px;
+    letter-spacing: 2.5px;
+    text-align: left;
+    margin: 15px 0;
     font-family: monospace; 
-    width: 310px; /* Ancho fijo para mantener la alineación */
-    text-align: left; /* El texto empieza de la izquierda */
 }
 
-/* Alineación Titular y Expiración en la misma línea */
+/* --- SEPARACIÓN ORDENADA: TITULAR Y EXPIRACIÓN --- */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-}
-
-.card-footer-info {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px; /* Espacio entre el titular y la fecha */
-    flex-grow: 1;
-    overflow: hidden; /* Evita que el texto rompa el diseño */
+    gap: 15px; /* Crea una separación natural entre los elementos */
 }
 
 .info-group.titular {
-    flex-shrink: 1;
-    min-width: 0; /* Permite que el texto largo se corte con puntos suspensivos */
+    flex: 1; /* Ocupa el espacio disponible empujando la expiración */
+    text-align: left;
+    overflow: hidden;
 }
 
 #card-name-display {
+    font-weight: 600;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Añade "..." si el nombre es muy largo */
+    text-overflow: ellipsis;
 }
 
 .info-group.expiracion {
-    flex-shrink: 0; /* Evita que la expiración se haga pequeña */
+    flex-shrink: 0;
+    text-align: right; /* Alinea el texto a la derecha de su contenedor */
+    padding-right: 10px;
 }
 
-.label { color: #a0aec0; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
+.label { color: #94a3b8; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
 .value { font-size: 14px; font-weight: 600; text-transform: uppercase; }
 
 .bank-logo-container {
@@ -126,24 +114,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-left: 15px;
 }
 
-.bank-logo-img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.bank-text-fallback {
-    color: #475569;
-    font-weight: 800;
-    font-size: 16px;
-    font-style: italic;
-}
+.bank-logo-img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
 /* --- DETALLES DEL REVERSO --- */
-.card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; background: #e2e8f0; color: #334155; }
+.card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; background: #e2e8f0; color: #334155; border: 1px solid #cbd5e1; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); }
 .magnetic-strip { background: #1e293b; height: 50px; width: 100%; margin-top: 25px; }
 .back-body { padding: 20px; }
 .signature-row { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
@@ -155,38 +131,38 @@ body {
 .footer-logo { display: flex; justify-content: flex-end; }
 .small-circle { width: 35px; height: 22px; background: #cbd5e1; border-radius: 4px; }
 
-/* --- BLOQUE DERECHO: FORMULARIO OSCURO --- */
+/* --- BLOQUE DERECHO: FORMULARIO (Sin recuadro) --- */
 .payment-form {
     width: 400px;
-    padding: 30px;
-    border-radius: 16px;
-    background-color: var(--form-bg-color); 
-    color: var(--form-text-color);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    background: transparent; /* Sin fondo sólido, toma el de la página */
+    box-shadow: none; /* Sin recuadro/sombra */
+    padding: 20px 0;
+    color: var(--text-dark);
 }
 
 .form-title {
     margin: 0 0 25px 0;
     font-size: 26px;
     text-align: center; 
-    color: white;
+    color: var(--text-dark);
 }
 
 .input-field { margin-bottom: 20px; }
-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #a0aec0; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
 input, select {
     width: 100%;
     padding: 14px 15px;
-    background: #1a1a1a; /* Inputs más oscuros que el fondo */
-    border: 1px solid var(--form-border-color);
-    color: white;
+    background: #ffffff; /* Inputs blancos para contrastar con la página */
+    border: 1px solid var(--input-border);
+    color: var(--text-dark);
     border-radius: 8px;
     font-size: 15px;
     outline: none;
     transition: all 0.3s;
     box-sizing: border-box;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
-input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1); }
+input:focus, select:focus { border-color: var(--primary-btn); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15); }
 .form-row { display: flex; gap: 15px; }
 .exp-group { flex: 2; }
 .cvv-group { flex: 1; }
@@ -194,8 +170,8 @@ input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
 
 .pay-button {
     width: 100%;
-    background-color: var(--primary);
-    color: #1a1a1a;
+    background-color: var(--primary-btn);
+    color: #ffffff;
     border: none;
     padding: 16px;
     border-radius: 8px;
@@ -204,6 +180,7 @@ input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
     cursor: pointer;
     margin-top: 15px;
     transition: background 0.3s, transform 0.1s;
+    box-shadow: 0 4px 6px rgba(99, 102, 241, 0.2);
 }
-.pay-button:hover { background-color: #f6e05e; }
+.pay-button:hover { background-color: #4f46e5; }
 .pay-button:active { transform: scale(0.98); }
