@@ -208,7 +208,7 @@ select.glass-input option { background: var(--bg-dark); color: white; }
         transform: scale(0.9);
         transform-origin: center top;
         margin-bottom: -15px; 
-        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatMobil 5s ease-in-out infinite 0.8s;
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatMobile 5s ease-in-out infinite 0.8s;
     }
     @keyframes floatMobile { 
         0% { transform: translateY(0px) scale(0.9); } 
