@@ -136,7 +136,7 @@ inputAmount.addEventListener('input', (e) => {
     }
 });
 
-// Procesar el Pago, mostrar Palomita y descargar PDF
+// Procesar el Pago, mostrar Palomita y descargar PDFd
 btnPay.addEventListener('click', (e) => {
     e.preventDefault();
 
