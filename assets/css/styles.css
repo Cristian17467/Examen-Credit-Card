@@ -1,8 +1,11 @@
 :root {
-    --primary: #6366f1;
-    --text-dark: #334155;
-    --text-light: #94a3b8;
-    --bg-page: #f8fafc; 
+    --primary: #ffd700; /* Dorado para detalles premium */
+    --card-bg-color: #1a1a1a; /* Negro premium de la tarjeta */
+    --text-color: #ffd700; /* Texto dorado en la tarjeta */
+    --bg-page: #f8fafc; /* Fondo general de la página web */
+    --form-bg-color: #262626; /* Gris oscuro para el formulario */
+    --form-border-color: #404040;
+    --form-text-color: #e5e5e5;
 }
 
 body {
@@ -17,7 +20,7 @@ body {
 
 .main-wrapper {
     display: flex;
-    gap: 60px; 
+    gap: 60px;
     align-items: center;
 }
 
@@ -47,10 +50,11 @@ body {
     height: 100%;
     backface-visibility: hidden;
     border-radius: 16px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #333;
     box-sizing: border-box;
-    background: #ffffff;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1); 
+    background: var(--card-bg-color); 
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2); 
+    color: var(--text-color);
 }
 
 /* --- DETALLES DEL FRENTE --- */
@@ -67,44 +71,54 @@ body {
     align-items: center;
 }
 
-.card-chip {
-    border-radius: 6px;
-}
-
-.nfc-icon-img {
-    opacity: 0.8;
-}
-
-/* NÚMERO DE TARJETA CENTRADO */
-.card-number-display {
-    font-size: 26px;
-    letter-spacing: 3px;
-    color: var(--text-dark);
-    text-align: center; /* Aquí centramos el número */
-    margin: 20px 0;
-    font-family: monospace; 
+/* Contenedor para centrar el número pero escribir de izquierda a derecha */
+.card-number-container {
+    display: flex;
+    justify-content: center;
     width: 100%;
+    margin: 15px 0;
 }
 
+.card-number-display {
+    font-size: 24px;
+    letter-spacing: 3px;
+    font-family: monospace; 
+    width: 310px; /* Ancho fijo para mantener la alineación */
+    text-align: left; /* El texto empieza de la izquierda */
+}
+
+/* Alineación Titular y Expiración en la misma línea */
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
 }
 
-.info-group { flex: 1; }
+.card-footer-info {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px; /* Espacio entre el titular y la fecha */
+    flex-grow: 1;
+    overflow: hidden; /* Evita que el texto rompa el diseño */
+}
 
-/* AJUSTES PARA MOVER LA EXPIRACIÓN MÁS ENFRENTE */
 .info-group.titular {
-    text-align: left;
-}
-.info-group.expiracion {
-    text-align: right; /* Lo alinea hacia el lado derecho */
-    padding-right: 15px; /* Un poco de margen para que no choque con el logo */
+    flex-shrink: 1;
+    min-width: 0; /* Permite que el texto largo se corte con puntos suspensivos */
 }
 
-.label { color: var(--text-light); font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; }
-.value { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+#card-name-display {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Añade "..." si el nombre es muy largo */
+}
+
+.info-group.expiracion {
+    flex-shrink: 0; /* Evita que la expiración se haga pequeña */
+}
+
+.label { color: #a0aec0; font-size: 10px; display: block; margin-bottom: 4px; font-weight: 600; text-transform: uppercase; }
+.value { font-size: 14px; font-weight: 600; text-transform: uppercase; }
 
 .bank-logo-container {
     width: 50px;
@@ -112,6 +126,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    margin-left: 15px;
 }
 
 .bank-logo-img {
@@ -121,62 +136,57 @@ body {
 }
 
 .bank-text-fallback {
-    color: #cbd5e1;
+    color: #475569;
     font-weight: 800;
     font-size: 16px;
     font-style: italic;
 }
 
 /* --- DETALLES DEL REVERSO --- */
-.card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; }
-.magnetic-strip { background: #cbd5e1; height: 50px; width: 100%; margin-top: 25px; }
+.card-back { transform: rotateY(180deg); padding: 0; overflow: hidden; background: #e2e8f0; color: #334155; }
+.magnetic-strip { background: #1e293b; height: 50px; width: 100%; margin-top: 25px; }
 .back-body { padding: 20px; }
 .signature-row { display: flex; align-items: center; gap: 10px; margin-top: 5px; }
-.white-bar-container {
-    display: flex;
-    flex-grow: 1;
-    height: 38px;
-    border: 1px solid #e2e8f0;
-    align-items: center;
-}
+.white-bar-container { display: flex; flex-grow: 1; height: 38px; border: 1px solid #cbd5e1; align-items: center; background: white; }
 .signature-fill { flex-grow: 1; text-align: right; padding-right: 15px; font-style: italic; color: #64748b; font-family: monospace; font-size: 16px; }
-.cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #e2e8f0; font-weight: bold; }
-.cvv-text-label { font-size: 13px; font-weight: 700; color: var(--text-dark); }
-.legal-text { font-size: 9px; color: #94a3b8; line-height: 1.4; margin-top: 20px; }
+.cvv-box-display { width: 50px; height: 100%; display: flex; align-items: center; justify-content: center; background: #f8fafc; border-left: 1px solid #cbd5e1; font-weight: bold; }
+.cvv-text-label { font-size: 13px; font-weight: 700; color: #334155; }
+.legal-text { font-size: 9px; color: #64748b; line-height: 1.4; margin-top: 20px; }
 .footer-logo { display: flex; justify-content: flex-end; }
-.small-circle { width: 35px; height: 22px; background: #e2e8f0; border-radius: 4px; }
+.small-circle { width: 35px; height: 22px; background: #cbd5e1; border-radius: 4px; }
 
-/* --- BLOQUE DERECHO: FORMULARIO --- */
+/* --- BLOQUE DERECHO: FORMULARIO OSCURO --- */
 .payment-form {
     width: 400px;
-    color: var(--text-dark);
-    background: transparent; 
-    padding: 20px 0;
-    box-shadow: none; 
+    padding: 30px;
+    border-radius: 16px;
+    background-color: var(--form-bg-color); 
+    color: var(--form-text-color);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
-/* TÍTULO DEL FORMULARIO CENTRADO */
 .form-title {
     margin: 0 0 25px 0;
     font-size: 26px;
     text-align: center; 
-    color: #1e293b;
+    color: white;
 }
 
 .input-field { margin-bottom: 20px; }
-label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #475569; }
+label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: #a0aec0; }
 input, select {
     width: 100%;
     padding: 14px 15px;
-    border: 1px solid #cbd5e1;
-    background: #ffffff; 
+    background: #1a1a1a; /* Inputs más oscuros que el fondo */
+    border: 1px solid var(--form-border-color);
+    color: white;
     border-radius: 8px;
     font-size: 15px;
     outline: none;
     transition: all 0.3s;
     box-sizing: border-box;
 }
-input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); }
+input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1); }
 .form-row { display: flex; gap: 15px; }
 .exp-group { flex: 2; }
 .cvv-group { flex: 1; }
@@ -185,7 +195,7 @@ input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
 .pay-button {
     width: 100%;
     background-color: var(--primary);
-    color: white;
+    color: #1a1a1a;
     border: none;
     padding: 16px;
     border-radius: 8px;
@@ -195,5 +205,5 @@ input:focus, select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px 
     margin-top: 15px;
     transition: background 0.3s, transform 0.1s;
 }
-.pay-button:hover { background-color: #4f46e5; }
+.pay-button:hover { background-color: #f6e05e; }
 .pay-button:active { transform: scale(0.98); }

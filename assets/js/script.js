@@ -6,8 +6,8 @@ const selectDay = document.getElementById('select-day');
 const selectYear = document.getElementById('select-year');
 const bankLogoDisplay = document.getElementById('bank-logo-display');
 
-// 1. Generar días (01 al 31)
-for (let i = 1; i <= 31; i++) {
+// 1. Generar meses (01 al 12)
+for (let i = 1; i <= 12; i++) {
     let d = i < 10 ? '0' + i : i;
     selectDay.add(new Option(d, d));
 }
@@ -18,7 +18,7 @@ for (let i = 1980; i <= 2026; i++) {
     selectYear.add(new Option(i, yearValue));
 }
 
-// 3. Lógica para detectar red de tarjeta y mostrar logo a los 8 dígitos
+// 3. Lógica para detectar red de tarjeta y mostrar logo
 const updateBankLogo = (rawNumber) => {
     bankLogoDisplay.innerHTML = '';
     
@@ -58,7 +58,7 @@ inputNumber.addEventListener('input', (e) => {
 
 // 5. Actualizar Nombre del titular
 inputName.addEventListener('input', (e) => {
-    document.getElementById('card-name-display').innerText = e.target.value.toUpperCase() || 'NOMBRE COMPLETO';
+    document.getElementById('card-name-display').innerText = e.target.value || 'NOMBRE COMPLETO';
 });
 
 // 6. Actualizar Fecha de Expiración
