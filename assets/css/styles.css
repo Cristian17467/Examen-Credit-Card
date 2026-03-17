@@ -19,7 +19,7 @@
 
 /* --- FONDOS GLOBALES --- */
 body {
-    background-image: url('../img/fondo.jpg'); /* Tu imagen de fondo */
+    background-image: url('../img/fondo.jpg'); /* Asegúrate de que tu imagen esté aquí */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -55,7 +55,7 @@ body {
     color: white;
 }
 
-/* FRENTE */
+/* FRENTE DE LA TARJETA */
 .card-front { padding: 25px; display: flex; flex-direction: column; }
 .nfc-icon-img path { animation: pulseWave 1.5s infinite; }
 .nfc-icon-img path:nth-child(1) { animation-delay: 0s; } .nfc-icon-img path:nth-child(2) { animation-delay: 0.2s; }
@@ -69,7 +69,7 @@ body {
 .bank-logo-container { position: absolute; bottom: 22px; right: 25px; width: 65px; height: 40px; display: flex; align-items: center; justify-content: flex-end; z-index: 10; }
 .bank-logo-container svg { width: 100%; height: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
 
-/* DORSO */
+/* DORSO DE LA TARJETA */
 .card-back { transform: rotateY(180deg); padding: 0; }
 .magnetic-strip { background: rgba(0, 0, 0, 0.8); height: 50px; width: 100%; margin-top: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 .back-body { padding: 20px; position: relative; height: calc(100% - 75px); }
@@ -114,5 +114,43 @@ select.glass-input option { background: var(--bg-dark); color: white; }
     color: white;
 }
 
-/* LINKS FOOTER */
-.hover-white:hover { color: #ffffff !important; text-shadow: 0 0 8px rgba(255,255,255,0.8); }
+/* --- ESTILOS EXTRA PARA NAVBAR Y FOOTER PREMIUM --- */
+
+/* Animación de subrayado en el menú */
+.custom-nav-link { 
+    position: relative; 
+    transition: all 0.3s ease; 
+    letter-spacing: 0.5px;
+}
+.custom-nav-link:hover { color: #ffffff !important; }
+.custom-nav-link::after {
+    content: ''; position: absolute; width: 0; height: 1px;
+    bottom: 5px; left: 50%; transform: translateX(-50%);
+    background-color: #c084fc; transition: width 0.3s ease;
+}
+.custom-nav-link:hover::after { width: 70%; }
+
+/* Botón de Carrito Glassmorphism */
+.glass-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.glass-btn:hover {
+    background: rgba(192, 132, 252, 0.2);
+    border-color: #c084fc;
+    box-shadow: 0 0 15px rgba(192, 132, 252, 0.3);
+    transform: translateY(-2px);
+    color: white;
+}
+
+/* Íconos sociales del Footer */
+.footer-link {
+    color: rgba(255, 255, 255, 0.4);
+    transition: all 0.3s ease;
+}
+.footer-link:hover {
+    color: #c084fc;
+    transform: translateY(-4px) scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.6));
+}
