@@ -154,3 +154,77 @@ select.glass-input option { background: var(--bg-dark); color: white; }
     transform: translateY(-4px) scale(1.1);
     filter: drop-shadow(0 0 10px rgba(192, 132, 252, 0.6));
 }
+/* =========================================
+   RESPONSIVIDAD MÓVIL (MEDIA QUERIES)
+========================================= */
+
+@media (max-width: 576px) {
+    /* Dar un poco más de aire en la parte superior en móviles */
+    main {
+        padding-top: 85px !important;
+        padding-bottom: 20px !important;
+    }
+
+    /* Escalar la tarjeta 3D para que no se desborde en pantallas pequeñas */
+    .card-section {
+        width: 100%;
+        /* Usamos scale para encogerla sin romper su diseño interno */
+        transform: scale(0.9);
+        transform-origin: center top;
+        margin-bottom: -15px; /* Compensa el espacio vacío dejado al escalar */
+        /* Reemplazamos la animación de flote para que respete la escala */
+        animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards, floatMobile 5s ease-in-out infinite 0.8s;
+    }
+
+    /* Nueva animación de flote exclusiva para móviles */
+    @keyframes floatMobile { 
+        0% { transform: translateY(0px) scale(0.9); } 
+        50% { transform: translateY(-8px) scale(0.9); } 
+        100% { transform: translateY(0px) scale(0.9); } 
+    }
+
+    /* Reducir el padding interno del formulario para ganar espacio */
+    .payment-form {
+        padding: 1.5rem !important;
+    }
+
+    /* Ajustar el footer para que el texto se apile elegante si no cabe */
+    .footer-brand {
+        flex-direction: column;
+        gap: 4px !important;
+        text-align: center;
+    }
+    .footer-brand span:nth-child(2) { 
+        display: none; /* Ocultamos la barrita vertical "|" en móviles */
+    }
+}
+
+/* Ajuste intermedio para tablets pequeñas */
+@media (min-width: 577px) and (max-width: 768px) {
+    .card-section {
+        transform: scale(0.95);
+        transform-origin: center;
+        margin-bottom: 10px;
+    }
+}
+#toggle-cvv {
+    z-index: 10;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#toggle-cvv:focus {
+    box-shadow: none; /* Quita el borde de enfoque de Bootstrap */
+}
+
+#eye-icon {
+    transition: all 0.2s ease;
+    font-size: 1.1rem;
+}
+
+#eye-icon:hover {
+    color: #c084fc !important; /* El color morado de tu marca */
+    transform: scale(1.1);
+}
